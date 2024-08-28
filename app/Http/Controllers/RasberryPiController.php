@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\UserSubscription;
 use App\Models\RasberryPiAnalytics;
 use App\Models\RasberryPiNotification;
+use App\Models\RasberryPiModel;
+use App\Models\RasberryPiToken;
+use Illuminate\Support\Str;
+
 
 class RasberryPiController extends Controller
 {
@@ -21,6 +25,7 @@ class RasberryPiController extends Controller
 
         $raspberryPis = Auth::user()->raspberryPis;
         $subscriptions = Auth::user()->subscriptions;
+        $models = RasberryPiModel::all();
         
         if($subscriptions && count($subscriptions) > 0) {
             $allowedRasberryPi = $subscriptions[0]->plan->allowed_rasberry;                        
@@ -28,12 +33,13 @@ class RasberryPiController extends Controller
                 return redirect()->route('rasberry-pi.view')->with("error", "You had exceed limit of rasberry pi");
             }
         }
-        return view('livewire.pages.manage-rasberry-pi.edit');
+        return view('livewire.pages.manage-rasberry-pi.edit', compact('models'));
     }
 
     public function edit (Request $request, $id) {
         $rasberryPi = RasberryPi::where('id', $id)->first();
-        return view('livewire.pages.manage-rasberry-pi.edit', compact('rasberryPi'));
+        $models = RasberryPiModel::all();
+        return view('livewire.pages.manage-rasberry-pi.edit', compact('rasberryPi', 'models'));
     }
 
     public function delete (Request $request, $id) {
@@ -50,7 +56,7 @@ class RasberryPiController extends Controller
         
         $request->validate([
             "pi_name" => "required",
-            "model" => "required"
+            "rasberry_pi_model_id" => "required"
         ]);
 
         $user = Auth::user();
@@ -61,7 +67,7 @@ class RasberryPiController extends Controller
 
         $data = array(
             "pi_name" => $request->pi_name,
-            "model" => $request->model,
+            "rasberry_pi_model_id" => $request->rasberry_pi_model_id,
             "user_subscription_id" => $subscription->id
         );
 
@@ -69,6 +75,10 @@ class RasberryPiController extends Controller
             $rasberryPi = RasberryPi::where("id", $request->id)->update($data);
         } else {
             $rasberryPi = RasberryPi::create($data);
+            RasberryPiToken::create(array(
+                'rasberry_pi_id' => $rasberryPi->id,
+                'token' => Str::uuid()
+            ));
         }
 
         return redirect()->route('rasberry-pi.view')->with("success", "Record(s) saved successfully.");
@@ -169,6 +179,67 @@ class RasberryPiController extends Controller
         } else if($value >= 75) {
             return "danger";
         }
+    }
+
+    public function setup(Request $request, $token) {
+        $scriptPath = storage_path('app/public/scripts/setup-rasberry-pi.py');
+        
+        if (!file_exists($scriptPath)) {
+            return response()->json(['error' => 'Python script not found'], 404);
+        }
+
+        $rasberryPiToken = RasberryPiToken::where('token', $token)->first();
+        
+        if($rasberryPiToken) {
+            $pythonCode = file_get_contents($scriptPath);
+            $url = env('APP_URL') . '/post-rasberry-data/' . $rasberryPiToken->rasberry_pi_id;
+
+            $pythonCode = str_replace(
+                ['{{ DYNAMIC_URL }}'], 
+                [$url], 
+                $pythonCode
+            );
+
+            $script = <<<EOD
+#!/bin/bash
+
+# Ensure the desired directory exists
+mkdir -p /home/ishraq/Desktop/pi/scripts
+
+# Write the Python script (connection.py) dynamically
+cat << 'EOF' > /home/ishraq/Desktop/pi/scripts/connection.py
+$pythonCode
+EOF
+
+# Create the shell script to run connection.py every 5 seconds
+cat << 'EOF' > /home/pi/scripts/run_connection.sh
+#!/bin/bash
+while true
+do
+  python3 /home/pi/scripts/connection.py
+  sleep 5
+done
+EOF
+
+# Make the run_connection.sh script executable
+chmod +x /home/pi/scripts/run_connection.sh
+
+# Add a cron job to run the script at boot
+(crontab -l 2>/dev/null; echo "@reboot /home/pi/scripts/run_connection.sh") | crontab -
+
+# Reboot the Raspberry Pi
+sudo reboot
+EOD;
+
+    // Return the script as a response with the correct content type
+    return response($script, 200)
+                ->header('Content-Type', 'application/x-sh');
+        }
+
+        return response()->json(['error' => 'Something went wrong, please try again'], 500);
+
+
+
     }
 
     // Data To Received

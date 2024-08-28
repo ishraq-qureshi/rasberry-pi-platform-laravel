@@ -40,6 +40,9 @@ new class extends Component
                         <x-nav-link :href="route('users.view')" :active="request()->routeIs('users.view')" wire:navigate>
                             {{ __('Manage Users') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('rasberry-pi-modal.view')" :active="request()->routeIs('rasberry-pi-modal.view')" wire:navigate>
+                            {{ __('Manage Models') }}
+                        </x-nav-link>
                     @endrole
                     @role('admin')
                         <x-nav-link :href="route('rasberry-pi.view')" :active="request()->routeIs('rasberry-pi.view')" wire:navigate>

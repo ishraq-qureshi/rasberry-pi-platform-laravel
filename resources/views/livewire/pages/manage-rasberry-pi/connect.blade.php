@@ -7,7 +7,28 @@
 
   <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="flex flex-col gap-4">
+        <div>
+          <ul class="text-sm font-medium text-center text-gray-500 rounded-lg shadow sm:flex">
+            <li class="w-full focus-within:z-10">
+                <a href="#automateTab" class="tab-item inline-block w-full p-4 text-gray-900 bg-gray-100 border-r border-gray-200 rounded-s-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none" aria-current="page">Automate</a>
+            </li>
+            <li class="w-full focus-within:z-10">
+                <a href="#manualTab" class="tab-item inline-block w-full p-4 bg-white border-r border-gray-200 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none">Manual</a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex flex-col gap-4 tab-content" id="automateTab">
+          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
+            <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Execute cURL Request</h5>
+              <p class="font-normal text-gray-700 dark:text-gray-400">Run this command on your rasberry pi shell to automate installation</p>
+              <div class="px-3 py-2">
+                <pre class="language-python"><code class="text-sm">curl -fsSL {{ env("APP_URL") }}/setup-rasberry-pi/{{ $rasberryPi->token->token }} | bash</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 hidden tab-content" id="manualTab">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
               <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Create a Pyhton Script</h5>
@@ -159,4 +180,15 @@ done</code></pre>
           </div>
       </div>
   </div>
+
+  <script>
+    jQuery(function(){
+      jQuery(".tab-item").click(function(e){
+        e.preventDefault();
+        const tabID = jQuery(this).attr('href');
+        jQuery('.tab-content').hide();
+        jQuery(tabID).show();
+      })
+    })
+  </script>
 </x-app-layout>

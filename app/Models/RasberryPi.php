@@ -11,7 +11,7 @@ class RasberryPi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["pi_name", "model", "user_subscription_id"];
+    protected $fillable = ["pi_name", "model", "user_subscription_id", "rasberry_pi_model_id"];
 
     public function subscription()
     {
@@ -21,6 +21,16 @@ class RasberryPi extends Model
     public function analytics()
     {
         return $this->hasOne(RasberryPiAnalytics::class, 'rasberry_pi_id');
+    }
+
+    public function model()
+    {
+        return $this->hasOne(RasberryPiModel::class, 'id');
+    }
+
+    public function token()
+    {
+        return $this->hasOne(RasberryPiToken::class, 'id');
     }
 
     public function notifications()

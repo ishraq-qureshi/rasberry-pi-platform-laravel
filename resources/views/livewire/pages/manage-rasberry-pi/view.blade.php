@@ -49,7 +49,7 @@
                                 {{ $rasberryPi->pi_name }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
-                                  {{ $rasberryPi->model }}
+                                  {{ $rasberryPi->model->model_name }}
                                 </td>
                                 <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
                                   <span class="w-2 h-2 inline-block {{ $rasberryPi->isOnline() ? 'bg-green' : 'bg-red-600' }} rounded-full"></span> {{ $rasberryPi->isOnline() ? "Online" : "Offline"}}                                  

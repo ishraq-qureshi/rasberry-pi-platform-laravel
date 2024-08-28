@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserSubscriptionController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\RasberryPiController;
+use App\Http\Controllers\RasberryPiModelController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +36,8 @@ require __DIR__.'/auth.php';
 Route::post('/stripe/webhook', [StripeController::class, 'handleWebhook']);
 
 Route::post('/post-rasberry-data/{id}', [RasberryPiController::class, 'postData'])->name('post-rasberry-data');
+
+Route::get('/setup-rasberry-pi/{token}', [RasberryPiController::class, 'setup'])->name('setup-rasberry-pi');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->group(function () {
@@ -87,6 +91,27 @@ Route::middleware('auth')->group(function () {
                 ->name('user-subscription.cancel');
             Route::get('/checkout/{plan_id?}', [UserSubscriptionController::class, 'checkout'])
                 ->name('user-subscription.checkout');
+        });
+
+        // Manage Rasberry Pi Modals
+        Route::prefix('manage-rasberry-pi-modals')->group(function () {
+            Route::get('', [RasberryPiModelController::class, "view"])            
+                ->name('rasberry-pi-modal.view');
+    
+            Route::get('create', [RasberryPiModelController::class, "create"])            
+                ->name('rasberry-pi-modal.create');
+    
+            Route::post('save', [RasberryPiModelController::class, "save"])            
+                ->name('rasberry-pi-modal.save');
+    
+            Route::get('edit/{id}', [RasberryPiModelController::class, "edit"])            
+                ->name('rasberry-pi-modal.edit');
+    
+            Route::get('delete/{id}', [RasberryPiModelController::class, "delete"])            
+                ->name('rasberry-pi-modal.delete');
+    
+            Route::delete('destroy/{id}', [RasberryPiModelController::class, "destroy"])            
+                ->name('rasberry-pi-modal.destroy');
         });
 
         // Manage Subscription Plan

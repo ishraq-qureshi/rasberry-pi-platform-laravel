@@ -35,8 +35,9 @@
                       </div>
                     @endforeach                    
                   </div>       
-                  
-                  <button id="buyPlan">Buy</button>
+                  <div class="flex justify-center mt-8">
+                    <button id="buyPlan" class="text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-lg px-5 py-2.5 text-center w-[300px]">Buy</button>
+                  </div>
               </div>
           </div>
       </div>

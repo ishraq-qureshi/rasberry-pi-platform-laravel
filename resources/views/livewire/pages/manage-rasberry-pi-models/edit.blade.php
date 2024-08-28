@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Manage RasberryPi') }}
+          {{ __('Manage Rasberry Pi Model') }}
       </h2>
   </x-slot>
 
@@ -10,42 +10,38 @@
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6 text-gray-900">
                   
-                <form class="" method="post" action="{{ route('rasberry-pi.save') }}">
+                <form class="" method="post" action="{{ route('rasberry-pi-modal.save') }}" enctype="multipart/form-data">
                   @csrf
                   <div class="mb-4">
-                    <label for="pi_name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                    <input type="text" name="pi_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter rasberry pi name" value="{{ isset($rasberryPi) ? $rasberryPi->pi_name : "" }}" />
-                    @error('pi_name')
+                    <label for="model_name" class="block mb-2 text-sm font-medium text-gray-900">Model Name</label>
+                    <input type="text" name="model_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter model name" value="{{ isset($model) ? $model->model_name : "" }}" />
+                    @error('model_name')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label for="model" class="block mb-2 text-sm font-medium text-gray-900">Model</label>
-                    <select id="model" name="rasberry_pi_model_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2 py-4">
-                      <option>Select your model</option>
-                      @foreach($models as $model)
-                        @php
-                          $selected = isset($rasberryPi) && $model->id === $rasberryPi->rasberry_pi_model_id ? "selected" : "";
-                        @endphp
-                        <option {{ $selected }} value="{{ $model->id }}">{{ $model->model_name }}</option>
-                      @endforeach
-                    </select>
-                    @error('rasberry_pi_model_id')
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="small_size">Model Image</label>
+                    <input class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="small_size" name="model_image" type="file">
+                    @error('model_image')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
+                    @if(isset($model))
+                    <div class="flex">
+                      <img src="{{ url('storage/model_images/' . $model->model_image) }}" alt="{{ $model->model_name }}" width="300" height="300" />
+                    </div>
+                    @endif
                   </div>
                   <div class="flex justify-end gap-4 mt-8">
-                    @isset($rasberryPi)
-                      <input type="hidden" name="id" value="{{ $rasberryPi->id }}" />
+                    @isset($model)
+                      <input type="hidden" name="id" value="{{ $model->id }}" />
                     @endisset
-                    <a href="{{ route('rasberry-pi.view') }}" class="py-2 px-6 bg-red-500 text-white rounded-md">
+                    <a href="{{ route('rasberry-pi-modal.view') }}" class="py-2 px-6 bg-red-500 text-white rounded-md">
                       Back
                     </a>
                     <button type="submit" class='class="py-2 px-6 bg-black text-white rounded-md'>
                       Save
                     </button>
-                  
-                  </div>                  
+                  </div>
                 </form>
 
               </div>
