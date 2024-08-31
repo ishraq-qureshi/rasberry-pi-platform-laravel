@@ -21,7 +21,7 @@ use App\Http\Controllers\RasberryPiModelController;
 
 Route::view('/', 'welcome');
 
-Route::group(['middleware' => 'check.subscription'], function () {
+Route::group(['middleware' => ['check.subscription', 'check.trial.subscription']], function () {
     Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -64,9 +64,12 @@ Route::middleware('auth')->group(function () {
         });
 
         // Manage User
-        Route::prefix('manage-users')->group(function () {
+        Route::prefix('manage-users')->middleware(['check.subscription', 'check.trial.subscription'])->group(function () {
             Route::get('', [UserController::class, "view"])            
                 ->name('users.view');    
+
+            Route::get('create', [UserController::class, "create"])            
+                ->name('users.create');
  
             Route::post('save', [UserController::class, "save"])            
                 ->name('users.save');
@@ -115,7 +118,7 @@ Route::middleware('auth')->group(function () {
         });
 
         // Manage Subscription Plan
-        Route::prefix('manage-rasberry-pi')->middleware('check.subscription')->group(function () {
+        Route::prefix('manage-rasberry-pi')->middleware(['check.subscription', 'check.trial.subscription'])->group(function () {
             Route::get('', [RasberryPiController::class, "view"])            
                 ->name('rasberry-pi.view');
     

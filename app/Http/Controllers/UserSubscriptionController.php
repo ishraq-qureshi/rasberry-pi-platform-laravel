@@ -40,46 +40,49 @@ class UserSubscriptionController extends Controller
             $currency = 'eur';
 
             try {
-                // Create a product on Stripe
-                $product = Product::create([
-                    'name' => $productName,
-                    'description' => $productDescription,
-                ]);
 
-                // Create a price plan for the product
-                $price = Price::create([
-                    'unit_amount' => $unitAmount,
-                    'currency' => $currency,
-                    'recurring' => ['interval' => 'month'],
-                    'product' => $product->id,
-                ]);
-
-                // Create or retrieve Stripe customer
-                $customerId = $user->stripe_customer_id;
-
-                if (!$customerId) {
-                    $customer = Customer::create([
-                        'email' => $user->email,
-                        'name' => $user->name,
+                if(!$plan->is_trial) {
+                    // Create a product on Stripe
+                    $product = Product::create([
+                        'name' => $productName,
+                        'description' => $productDescription,
                     ]);
-
-                    $customerId = $customer->id;
-                    $user->stripe_customer_id = $customerId;
-                    // $user->save();
+    
+                    // Create a price plan for the product
+                    $price = Price::create([
+                        'unit_amount' => $unitAmount,
+                        'currency' => $currency,
+                        'recurring' => ['interval' => 'month'],
+                        'product' => $product->id,
+                    ]);
+    
+                    // Create or retrieve Stripe customer
+                    $customerId = $user->stripe_customer_id;
+    
+                    if (!$customerId) {
+                        $customer = Customer::create([
+                            'email' => $user->email,
+                            'name' => $user->name,
+                        ]);
+    
+                        $customerId = $customer->id;
+                        $user->stripe_customer_id = $customerId;
+                        // $user->save();
+                    }
+    
+                    // Create a new Stripe Checkout Session for a subscription
+                    $checkout_session = Session::create([
+                        'payment_method_types' => ['card'],
+                        'customer' => $customerId, // Attach the customer to the session
+                        'line_items' => [[
+                            'price' => $price->id, // Use the dynamically created price ID
+                            'quantity' => 1,
+                        ]],
+                        'mode' => 'subscription',
+                        'success_url' => route('user-subscription.success'),
+                        'cancel_url' => route('user-subscription.cancel'),
+                    ]);
                 }
-
-                // Create a new Stripe Checkout Session for a subscription
-                $checkout_session = Session::create([
-                    'payment_method_types' => ['card'],
-                    'customer' => $customerId, // Attach the customer to the session
-                    'line_items' => [[
-                        'price' => $price->id, // Use the dynamically created price ID
-                        'quantity' => 1,
-                    ]],
-                    'mode' => 'subscription',
-                    'success_url' => route('user-subscription.success'),
-                    'cancel_url' => route('user-subscription.cancel'),
-                ]);
 
                 $subscription = UserSubscription::where([
                     "user_id" => $user->id,                    
@@ -87,7 +90,7 @@ class UserSubscriptionController extends Controller
 
                 if($subscription) {
                     
-                    $subscription->status = "pending";
+                    $subscription->status = $plan->is_trial ? "active" : "pending";
                     $subscription->subscription_id = $plan->id;
                     $subscription->price = $plan->isDiscount ? $plan->discount_price : $plan->price;
                     $subscription->save();
@@ -97,11 +100,13 @@ class UserSubscriptionController extends Controller
                         "user_id" => $user->id,
                         "subscription_id" => $plan->id,
                         "price" => $plan->isDiscount ? $plan->discount_price : $plan->price,
-                        "status" => "pending"
+                        "status" => $plan->is_trial ? "active" : "pending"
                     ));
                 }
 
-
+                if($plan->is_trial) {
+                    return redirect()->route('user-subscription.success');
+                }
                 // Redirect to Stripe Checkout
                 return redirect($checkout_session->url);
 

@@ -34,13 +34,31 @@
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label for="isDiscount" class="inline-flex items-center">
-                        <input name="isDiscount" value="1" id="isDiscount" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ isset($plan) && $plan->isDiscount ? "checked" : "" }}>
-                        <span class="ms-2 text-sm text-gray-600">{{ __('Is Discount?') }}</span>
-                    </label>
-                    @error('isDiscount')
+                    <label for="allowed_users" class="block mb-2 text-sm font-medium text-gray-900">Allowed Sub Admins</label>
+                    <input type="number" name="allowed_users" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter plan allowed sub admins" value="{{ isset($plan) ? $plan->allowed_users : "" }}"/>
+                    @error('allowed_users')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
+                  </div>
+                  <div class="mb-4 flex items-center gap-8">
+                    <div>
+                      <label for="isDiscount" class="inline-flex items-center">
+                        <input name="isDiscount" value="1" id="isDiscount" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ isset($plan) && $plan->isDiscount ? "checked" : "" }}>
+                        <span class="ms-2 text-sm text-gray-600">{{ __('Is Discount?') }}</span>
+                      </label>
+                      @error('isDiscount')
+                          <div class="text-red-600 text-xs">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div>
+                      <label for="is_trial" class="inline-flex items-center">
+                        <input name="is_trial" value="1" id="is_trial" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ isset($plan) && $plan->is_trial ? "checked" : "" }}>
+                        <span class="ms-2 text-sm text-gray-600">{{ __('Trial Plan?') }} <small>(Trial plan will be active for 14 days only and only one can be selected as trial at a time)</small></span>
+                      </label>
+                      @error('is_trial')
+                          <div class="text-red-600 text-xs">{{ $message }}</div>
+                      @enderror
+                    </div>
                   </div>
                   <div class="mb-4 {{ isset($plan) && $plan->isDiscount ? "" : "hidden" }}" id="discountPrice">
                     <label for="discount_price" class="block mb-2 text-sm font-medium text-gray-900">Discount Price</label>

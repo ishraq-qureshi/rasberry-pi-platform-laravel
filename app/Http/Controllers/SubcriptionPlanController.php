@@ -40,7 +40,8 @@ class SubcriptionPlanController extends Controller
             'price' => 'required|numeric',
             'isDiscount' => 'boolean',
             'allowed_rasberry' => 'required|numeric',
-            'discount_price' => 'required_if:isDiscount,1'
+            'discount_price' => 'required_if:isDiscount,1',
+            'allowed_users' => 'required|numeric',
         ]);
 
         $data = array(
@@ -50,6 +51,8 @@ class SubcriptionPlanController extends Controller
             "isDiscount" => isset($request->isDiscount) ? true : false,
             "discount_price" => isset($request->isDiscount) ? $request->discount_price : null,
             "features" => isset($request->features) ? serialize($request->features) : null,
+            "allowed_users" => $request->allowed_users,
+            "is_trial" => isset($request->is_trial) ? $request->is_trial : 0
         );
 
         if($request->id) {

@@ -2,6 +2,8 @@
 
 use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
+use Carbon\Carbon;
+
 
 new class extends Component
 {
@@ -20,7 +22,7 @@ new class extends Component
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex items-center flex-1">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" wire:navigate>
@@ -29,7 +31,7 @@ new class extends Component
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex flex-1">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -48,10 +50,26 @@ new class extends Component
                         <x-nav-link :href="route('rasberry-pi.view')" :active="request()->routeIs('rasberry-pi.view')" wire:navigate>
                             {{ __('Manage Rasberry Pi') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('users.view')" :active="request()->routeIs('users.view')" wire:navigate>
+                            {{ __('Manage Users') }}
+                        </x-nav-link>
                     @endrole
                 </div>
-            </div>
-
+                @if(isset(auth()->user()->subscriptions) && count(auth()->user()->subscriptions) > 0)
+                    @if(auth()->user()->subscriptions[0]->plan->is_trial)
+                        @php
+                            $subscriptionDate = Carbon::parse(auth()->user()->subscriptions[0]->created_at);
+                            $subscriptionEndDate = $subscriptionDate->addDays(14);
+                            $remainingDays = Carbon::now()->diffInDays($subscriptionEndDate, false);
+                        @endphp
+                        @if($remainingDays > 0)
+                            <p class="text-red-600 font-bold text-sm">Trial Ends in {{ $remainingDays }} day(s)</p>
+                        @else
+                            <p class="text-red-600 font-bold text-sm">Your Trial Plan Has Been Ended</p>
+                        @endif
+                    @endif
+                @endif
+            </div>            
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">

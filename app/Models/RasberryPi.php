@@ -24,8 +24,8 @@ class RasberryPi extends Model
     }
 
     public function model()
-    {
-        return $this->hasOne(RasberryPiModel::class, 'id');
+    {        
+        return $this->belongsTo(RasberryPiModel::class, 'rasberry_pi_model_id');
     }
 
     public function token()

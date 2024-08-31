@@ -55,4 +55,25 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(RasberryPi::class, UserSubscription::class);
     }
+
+    public function trialSubscription() {
+
+        $subscription = $this->subscriptions;
+        if(isset($subscription) && count($subscription) > 0) {
+            return $subscription[0]->plan->is_trial;
+        }
+
+        return false;
+    }
+
+    public function subUsers()
+    {
+        return $this->hasMany(SubUser::class, 'parent_user_id');
+    }
+
+    public function subUser()
+    {
+        return $this->hasOne(SubUser::class, 'user_id');
+    }
+
 }

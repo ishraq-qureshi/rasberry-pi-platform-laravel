@@ -2,8 +2,11 @@
   <x-slot name="header">
       <div class="flex justify-between items-center">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Manage Subscription Plans') }}
+          {{ __('Manage Users') }}
         </h2>
+        @role("admin")
+          <a href="{{ route('users.create') }}" class="py-2 px-6 bg-black text-white rounded-md">Add New Admin</a>
+        @endrole
       </div>
   </x-slot>
 
@@ -12,6 +15,11 @@
           @if(session('success'))
             <div class="p-4 mb-4 text-sm text-white bg-green rounded-lg border border-green" role="alert">
               <span class="font-medium">Success!</span> {{ session('success') }}
+            </div>
+          @endif
+          @if(session('error'))
+            <div class="p-4 mb-4 text-sm text-white bg-red-600 rounded-lg border border-red-600" role="alert">
+              <span class="font-medium">Error!</span> {{ session('error') }}
             </div>
           @endif
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -41,7 +49,7 @@
                         @if(isset($users) && count($users) > 0)
                           @foreach($users as $user)
                             <tr class="bg-white border-b">
-                                                    
+                                @role('superadmin')
                                 <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                 {{ $user->name }}
                                 </th>
@@ -58,6 +66,26 @@
                                   <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                   <a href="{{ route('users.delete', ['id' => $user->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
                               </td>
+                                @endrole
+                                @role('admin')
+                                  <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
+                                  {{ $user->user->name }}
+                                  </th>
+                                  <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                                    {{ $user->user->email }}
+                                  </td>       
+                                  <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                                    {{ $user->parentUser->subscriptions && count($user->parentUser->subscriptions) > 0 ? $user->parentUser->subscriptions[0]->plan->plan_name : "No Plan Selected" }}
+                                  </td>
+                                  <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center capitalize">
+                                    {{ $user->parentUser->subscriptions && count($user->parentUser->subscriptions) > 0 ? $user->parentUser->subscriptions[0]->status : "Pending" }}
+                                  </td>
+                                  <td class="flex items-center justify-center px-6 py-4">
+                                    <a href="{{ route('users.edit', ['id' => $user->user->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a href="{{ route('users.delete', ['id' => $user->user->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                  </td>
+                                @endrole
+                                
                             </tr>                          
                             @endforeach
                           @else

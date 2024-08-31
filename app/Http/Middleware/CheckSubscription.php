@@ -22,17 +22,36 @@ class CheckSubscription
             return $next($request);
         }
 
-        if ($user) {
-            $subscription = $user->subscriptions()
-                                ->whereHas('payments', function($query) {
-                                    $query->where('status', 'succeeded');
-                                })
-                                ->first();
+        if ($user) {                            
+            if($user->hasRole('admin')) {
+                $subscription = $user->subscriptions()
+                                    ->whereHas('payments', function($query) {
+                                        $query->where('status', 'succeeded');
+                                    })
+                                    ->first();
+    
+                $tial_user = $user->trialSubscription();
+    
+                if ($subscription || $tial_user) {
+                    // If user has a subscription and the payment is successful
+                    return $next($request);
+                }
+            } else {
 
-            if ($subscription) {
-                // If user has a subscription and the payment is successful
-                return $next($request);
+                $subscription = $user->subUser->parentUser->subscriptions()
+                                    ->whereHas('payments', function($query) {
+                                        $query->where('status', 'succeeded');
+                                    })
+                                    ->first();
+    
+                $tial_user = $user->subUser->parentUser->trialSubscription();
+    
+                if ($subscription || $tial_user) {
+                    // If user has a subscription and the payment is successful
+                    return $next($request);
+                }
             }
+
         }
 
         // Redirect to a specific route if no subscription or no successful payment

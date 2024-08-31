@@ -19,9 +19,9 @@
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
-                  <div class="mb-4">
+                  <div class="mb-4">                    
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                    <input type="email" disabled name="email" class="border bg-gray-200 cursor-not-allowed border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter email" value="{{ isset($user) ? $user->email : "" }}"/>
+                    <input type="email" {{ isset($user) ? "disabled" : "" }} name="email" class="border {{ isset($user) ? "bg-gray-200 cursor-not-allowed" : "" }} border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter email" value="{{ isset($user) ? $user->email : "" }}"/>
                     @error('email')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror

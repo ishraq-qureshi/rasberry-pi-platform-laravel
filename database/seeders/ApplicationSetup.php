@@ -17,6 +17,7 @@ class ApplicationSetup extends Seeder
     {
         $superAdmin = Role::create(['name' => 'superadmin']);
         $admin = Role::create(['name' => 'admin']);
+        $admin = Role::create(['name' => 'subadmin']);
 
         $user = User::create([
             'name' => 'Super Admin',

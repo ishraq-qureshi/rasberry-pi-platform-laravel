@@ -9,18 +9,28 @@
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6 text-gray-900">
-                  <div class="flex gap-4">
+                  <div class="flex gap-4 flex-wrap">
                     @foreach ($subscriptionPlans as $plan)
-                      <div id="subscription_{{ $plan->id }}" data-id="{{ $plan->id }}" data-price="{{ $plan->isDiscount ? $plan->discount_price : $plan->price }}" class="subscription_box flex flex-col p-6 mx-auto w-full text-center text-gray-900 bg-white rounded-md border border-gray-200">
+                      @php
+                        $activePlanId = 0;
+                        if(isset(auth()->user()->subscriptions) && count(auth()->user()->subscriptions) > 0):
+                          $activePlanId = auth()->user()->subscriptions[0]->plan->id;
+                        endif
+                      @endphp
+                      <div id="subscription_{{ $plan->id }}" data-id="{{ $plan->id }}" data-price="{{ $plan->isDiscount ? $plan->discount_price : $plan->price }}" class="subscription_box max-w-[calc(100%/3-20px)] flex flex-col p-6 mx-auto w-full text-center text-gray-900 bg-white rounded-md border border-gray-200">
                         <h3 class="mb-4 text-2xl font-semibold">{{ $plan->plan_name }}</h3>
                         <p class="font-light text-gray-500">Allowed Rasberry Pi: {{ $plan->allowed_rasberry }} units</p>
                         <div class="flex flex-col gap-2 my-4">
-                          @if($plan->isDiscount)
+                          @if($plan->isDiscount && !$plan->is_trial)
                             <p class="text-gray-400 line-through">€{{ number_format($plan->price, 2) }}</p>
                           @endif
                           <div class="flex justify-center items-baseline">
-                            <span class="mr-2 text-5xl font-extrabold">€{{ number_format($plan->isDiscount ? $plan->discount_price : $plan->price, 2) }}</span>
-                            <span class="text-gray-500 dark:text-gray-400">/month</span>
+                            @if($plan->is_trial)
+                              <span class="mr-2 text-5xl font-extrabold">Free</span>
+                            @else
+                              <span class="mr-2 text-5xl font-extrabold">€{{ number_format($plan->isDiscount ? $plan->discount_price : $plan->price, 2) }}</span>
+                              <span class="text-gray-500 dark:text-gray-400">/month</span>
+                            @endif
                           </div>
                         </div>
                         <ul role="list" class="mb-8 space-y-4 text-left">
@@ -31,12 +41,12 @@
                           </li>
                           @endforeach
                         </ul>
-                        <button type="button" class="selectSubscriptionPlan text-white bg-blue-600 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Select</button>
+                        <button type="button" class="selectSubscriptionPlan text-white {{ $activePlanId === $plan->id ? "bg-green cursor-not-allowed" : "bg-blue-600" }} hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{ $activePlanId === $plan->id ? "Active" : "Select" }}</button>
                       </div>
                     @endforeach                    
-                  </div>       
+                  </div>
                   <div class="flex justify-center mt-8">
-                    <button id="buyPlan" class="text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-lg px-5 py-2.5 text-center w-[300px]">Buy</button>
+                    <button id="buyPlan" class="text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-lg px-5 py-2.5 text-center w-[300px]">Get Started</button>
                   </div>
               </div>
           </div>
