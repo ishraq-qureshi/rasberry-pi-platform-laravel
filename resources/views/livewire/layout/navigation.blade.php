@@ -54,6 +54,11 @@ new class extends Component
                             {{ __('Manage Users') }}
                         </x-nav-link>
                     @endrole
+                    @role('subadmin')
+                    <x-nav-link :href="route('rasberry-pi.view')" :active="request()->routeIs('rasberry-pi.view')" wire:navigate>
+                        {{ __('Manage Rasberry Pi') }}
+                    </x-nav-link>
+                    @endrole
                 </div>
                 @if(isset(auth()->user()->subscriptions) && count(auth()->user()->subscriptions) > 0)
                     @if(auth()->user()->subscriptions[0]->plan->is_trial)

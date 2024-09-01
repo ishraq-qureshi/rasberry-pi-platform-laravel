@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\RasberryPi;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserSubscription;
+use App\Models\UserRasberryPi;
 use App\Models\RasberryPiAnalytics;
 use App\Models\RasberryPiNotification;
 use App\Models\RasberryPiModel;
@@ -16,7 +17,12 @@ use Illuminate\Support\Str;
 class RasberryPiController extends Controller
 {
     public function view (Request $request) {
-        $rasberryPis = Auth::user()->raspberryPis;
+        $user = Auth::user();
+        $rasberryPis = $user->raspberryPis;
+
+        if($user->hasRole('subadmin')){
+            $rasberryPis = $user->subUserRasberryPi;    
+        }
 
         return view('livewire.pages.manage-rasberry-pi.view', compact('rasberryPis'));
     }
@@ -48,6 +54,7 @@ class RasberryPiController extends Controller
     }
 
     public function destroy (Request $request, $id) {
+        UserRasberryPi::where(["rasberry_pi_id" => $id])->delete();
         RasberryPi::where('id', $id)->delete();
         return redirect()->route('rasberry-pi.view')->with("success", "Record(s) deleted successfully.");
     }
@@ -62,8 +69,14 @@ class RasberryPiController extends Controller
         $user = Auth::user();
 
         $subscription = UserSubscription::where([
-            "user_id" => $user->id,                    
+            "user_id" => $user->id,
         ])->first();
+
+        if($user->hasRole('subadmin')):
+            $subscription = UserSubscription::where([
+                "user_id" => $user->subUser->parentUser->id,
+            ])->first();
+        endif;
 
         $data = array(
             "pi_name" => $request->pi_name,
@@ -73,13 +86,21 @@ class RasberryPiController extends Controller
 
         if($request->id) {
             $rasberryPi = RasberryPi::where("id", $request->id)->update($data);
+            
         } else {
             $rasberryPi = RasberryPi::create($data);
             RasberryPiToken::create(array(
                 'rasberry_pi_id' => $rasberryPi->id,
                 'token' => Str::uuid()
             ));
+
+            UserRasberryPi::create(array(
+                "user_id" => $user->id,
+                "rasberry_pi_id" => $rasberryPi->id,
+            ));
         }
+
+
 
         return redirect()->route('rasberry-pi.view')->with("success", "Record(s) saved successfully.");
 

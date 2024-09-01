@@ -7,6 +7,7 @@ use App\Http\Controllers\UserSubscriptionController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\RasberryPiController;
 use App\Http\Controllers\RasberryPiModelController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,11 @@ use App\Http\Controllers\RasberryPiModelController;
 Route::view('/', 'welcome');
 
 Route::group(['middleware' => ['check.subscription', 'check.trial.subscription']], function () {
-    Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    Route::get("dashboard", [DashboardController::class, "view"])->middleware(['auth', 'verified'])->name('dashboard');    
 });
+
+Route::get("dashboard/getCpuUsage/{hours}", [DashboardController::class, "getCpuUsage"])->name('dashboard.getCpuUsage');
+Route::get("dashboard/getRamUsage/{hours}", [DashboardController::class, "getRamUsage"])->name('dashboard.getRamUsage');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

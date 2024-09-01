@@ -16,6 +16,8 @@
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
@@ -35,6 +37,8 @@
             <main>
                 {{ $slot }}
             </main>
+
+            
         </div>
     </body>
 </html>

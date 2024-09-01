@@ -44,7 +44,7 @@
                         @if(isset($rasberryPis) && count($rasberryPis) > 0)
                           @foreach($rasberryPis as $rasberryPi)
                             <tr class="bg-white border-b">
-                                                    
+                              @role("admin")                      
                               <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                 {{ $rasberryPi->pi_name }}
                                 </th>
@@ -60,6 +60,24 @@
                                   <a href="{{ route('rasberry-pi.connect', ['id' => $rasberryPi->id]) }}" class="font-medium text-gray-600 dark:text-gray-500 hover:underline ms-3">Connect</a>
                                   <a href="{{ route('rasberry-pi.details', ['id' => $rasberryPi->id]) }}" class="font-medium text-black hover:underline ms-3">View</a>
                               </td>
+                              @endrole
+                              @role("subadmin")                      
+                              <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
+                                {{ $rasberryPi->rasberry_pi->pi_name }}
+                                </th>
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                                  {{ $rasberryPi->rasberry_pi->model->model_name }}
+                                </td>
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                                  <span class="w-2 h-2 inline-block {{ $rasberryPi->rasberry_pi->isOnline() ? 'bg-green' : 'bg-red-600' }} rounded-full"></span> {{ $rasberryPi->rasberry_pi->isOnline() ? "Online" : "Offline"}}                                  
+                                </td>
+                                <td class="flex items-center justify-center px-6 py-4">
+                                  <a href="{{ route('rasberry-pi.edit', ['id' => $rasberryPi->rasberry_pi->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                  <a href="{{ route('rasberry-pi.delete', ['id' => $rasberryPi->rasberry_pi->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                  <a href="{{ route('rasberry-pi.connect', ['id' => $rasberryPi->rasberry_pi->id]) }}" class="font-medium text-gray-600 dark:text-gray-500 hover:underline ms-3">Connect</a>
+                                  <a href="{{ route('rasberry-pi.details', ['id' => $rasberryPi->rasberry_pi->id]) }}" class="font-medium text-black hover:underline ms-3">View</a>
+                              </td>
+                              @endrole
                             </tr>                          
                             @endforeach
                           @else

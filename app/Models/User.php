@@ -76,4 +76,9 @@ class User extends Authenticatable
         return $this->hasOne(SubUser::class, 'user_id');
     }
 
+    public function subUserRasberryPi()
+    {
+        return $this->hasMany(UserRasberryPi::class, 'user_id');
+    }
+
 }
