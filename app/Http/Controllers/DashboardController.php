@@ -29,6 +29,8 @@ class DashboardController extends Controller
 
             $data["ramUsage"] = array();
 
+            $data["notifications"] = array();
+
             $data["storageUsage"] = array(
                 "names" => array(),
                 "series" => array(
@@ -51,6 +53,9 @@ class DashboardController extends Controller
                 } else {
                     $data["totalDevices"]["offline"] = $data["totalDevices"]["offline"] + 1;
                 }
+
+                $pi->load(['notifications.rasberryPi']);                
+                $data["notifications"] = array_merge($data["notifications"], $pi->notifications->toArray());
 
                 
                 if(isset($pi->analytics)) {
@@ -124,6 +129,14 @@ class DashboardController extends Controller
             $data["ramUsage"] = json_encode($data["ramUsage"]);
 
             $data["storageUsage"] = json_encode($data["storageUsage"]);
+
+            // Sort the array by the 'created_at' field
+            usort($data["notifications"], function ($a, $b) {
+                return strtotime($b['created_at']) - strtotime($a['created_at']);
+            });
+
+            // Get the latest 10 records
+            $data["notifications"] = array_slice($data["notifications"], 0, 6);
 
             return view('livewire.pages.manage-dashboard.admin', compact("data"));
         }

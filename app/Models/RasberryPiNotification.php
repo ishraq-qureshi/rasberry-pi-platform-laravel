@@ -11,8 +11,8 @@ class RasberryPiNotification extends Model
 
     protected $fillable = ["rasberry_pi_id", "value", "type", "status"];
 
-    public function raspberryPi()
+    public function rasberryPi()
     {
-        return $this->belongsTo(RaspberryPi::class, 'rasberry_pi_id');
+        return $this->belongsTo(RasberryPi::class, 'rasberry_pi_id');
     }
 }
