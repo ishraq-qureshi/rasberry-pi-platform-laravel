@@ -1,8 +1,8 @@
 import './bootstrap';
 
 
-jQuery(function(){
+$(function(){
   setTimeout(() => {
-    jQuery('div[role=alert]').remove()
+    $('div[role=alert]').remove()
   }, 5000);
 })

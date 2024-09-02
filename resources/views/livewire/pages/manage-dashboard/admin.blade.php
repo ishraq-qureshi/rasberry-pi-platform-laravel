@@ -147,7 +147,104 @@
                 </div>
                 {{-- TOTAL RAM USAGE --}} 
               </div>
-            </div>                                             
+            </div>
+            
+            <div class="flex gap-4 w-full items-start">
+              {{-- TOP RASBERRY PI --}}
+              <div class="bg-white flex-1 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                  <h2>Rasberry Pi</h2>
+                  <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-gray-400 uppercase">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">
+                                  {{ __('Name') }}
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-center">
+                                  {{ __('Model') }}
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-center">
+                                  {{ __('Status') }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @if(isset($data['rasberryPis']) && count($data['rasberryPis']) > 0)
+                            @foreach($data['rasberryPis'] as $rasberryPi)
+                              <tr class="bg-white border-b">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
+                                  {{ $rasberryPi->pi_name }}
+                                  </th>
+                                  <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                                    {{ $rasberryPi->model->model_name }}
+                                  </td>
+                                  <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                                    <span class="w-2 h-2 inline-block {{ $rasberryPi->isOnline() ? 'bg-green' : 'bg-red-600' }} rounded-full"></span> {{ $rasberryPi->isOnline() ? "Online" : "Offline"}}                                  
+                                  </td>                              
+                              </tr>                          
+                              @endforeach
+                            @else
+                              <tr>
+                                <td colspan="5">
+                                  <p class="text-center">No Record(s) available.</p>
+                                </td>
+                              </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                  </div>
+  
+                  
+                </div>
+              </div>
+
+              <div class="bg-white flex-1 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                  <h2>Users</h2>
+                  <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-gray-400 uppercase">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">
+                                  {{ __('Full Name') }}
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-center">
+                                  {{ __('Email') }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @if(isset($data["admins"]) && count($data["admins"]) > 0)
+                            @foreach($data["admins"] as $user)
+                              <tr class="bg-white border-b">
+                                
+                                  <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
+                                  {{ $user->user->name }}
+                                  </th>
+                                  <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                                    {{ $user->user->email }}
+                                  </td>                                               
+                              </tr>                          
+                              @endforeach
+                            @else
+                              <tr>
+                                <td colspan="5">
+                                  <p class="text-center">No Record(s) available.</p>
+                                </td>
+                              </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                  </div>
+  
+                  
+                </div>
+            </div>
+
+            </div>
+
+
           </div>
       </div>
   </div>
@@ -155,7 +252,7 @@
 
   <script>
 
-      const getTotalDevicesChartOptions = () => {
+      var getTotalDevicesChartOptions = () => {
           return {
               series: [{{ $data["totalDevices"]["online"] }}, {{ $data["totalDevices"]["offline"] }}],
               colors: ["#1C64F2", "#D22B2B",],
@@ -184,7 +281,7 @@
                                   label: "Total Devices",
                                   fontFamily: "Inter, sans-serif",
                                   formatter: function (w) {
-                                      const sum = w.globals.seriesTotals.reduce((a, b) => {
+                                      var sum = w.globals.seriesTotals.reduce((a, b) => {
                                           return a + b
                                       }, 0)
                                       return sum
@@ -244,9 +341,9 @@
           chart.render(); 
       }
 
-      const cpuJSONData = JSON.parse({!! json_encode($data["cpuUsage"]) !!});
+      var cpuJSONData = JSON.parse({!! json_encode($data["cpuUsage"]) !!});
 
-      const getCpuUsageChartOptions = {
+      var getCpuUsageChartOptions = {
         chart: {
           height: "100%",
           maxWidth: "100%",
@@ -312,14 +409,14 @@
         chart.render();
 
         jQuery("#cpuInterval").change(function() {
-          const interval = jQuery(this).val();
+          var interval = jQuery(this).val();
           
           jQuery.ajax({
               url: "{{ route('dashboard.getCpuUsage', ':hours') }}".replace(':hours', interval),
               type: "GET",
               success: function(data) {
                   if(data.success) {
-                    const newData = JSON.parse(data.data);
+                    var newData = JSON.parse(data.data);
                     chart.updateSeries(newData) 
                   }
                   // Handle the received data (e.g., update your chart)
@@ -331,7 +428,7 @@
         });
       }
 
-      const getRamUsageChartOptions = {
+      var getRamUsageChartOptions = {
         chart: {
           height: "100%",
           maxWidth: "100%",
@@ -397,14 +494,14 @@
         chart.render();
 
         jQuery("#ramInterval").change(function() {
-          const interval = jQuery(this).val();
+          var interval = jQuery(this).val();
           
           jQuery.ajax({
               url: "{{ route('dashboard.getRamUsage', ':hours') }}".replace(':hours', interval),
               type: "GET",
               success: function(data) {
                   if(data.success) {
-                    const newData = JSON.parse(data.data);
+                    var newData = JSON.parse(data.data);
                     chart.updateSeries(newData) 
                   }
                   // Handle the received data (e.g., update your chart)
@@ -417,9 +514,9 @@
       }
 
 
-      const storageUsageData = JSON.parse({!! json_encode($data["storageUsage"]) !!});
+      var storageUsageData = JSON.parse({!! json_encode($data["storageUsage"]) !!});
 
-      const totalStorageChartOptions = {
+      var totalStorageChartOptions = {
         series: storageUsageData.series,
         chart: {
           sparkline: {

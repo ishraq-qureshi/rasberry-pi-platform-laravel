@@ -17,7 +17,7 @@ class UserRasberryPi extends Model
     }
 
     public function rasberry_pi (){
-        return $this->belongsTo(RasberryPI::class, "rasberry_pi_id");
+        return $this->belongsTo(RasberryPi::class, "rasberry_pi_id");
     }
 
 }
