@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\RasberryPiNotification;
+use App\Models\User;
+use App\Models\Payment;
+use App\Models\UserSubscription;
 
 class DashboardController extends Controller
 {
@@ -17,10 +20,55 @@ class DashboardController extends Controller
 
         if($user->hasRole('superadmin')){
 
-            // $rasberryPis = $user->raspberryPis;
+            $data["totalUsersCount"] = User::whereDoesntHave('roles', function($query) {
+                $query->where('name', 'superadmin');
+            })->get()->count();
+
+            $data["totalRevenueWeek"] = Payment::where('status', 'succeeded')
+            ->whereBetween('created_at', [
+                Carbon::now()->subWeek(), // Start of last week
+                Carbon::now()             // Now
+            ])
+            ->sum("price");
+
+            $data["totalRevenueMonth"] = Payment::where('status', 'succeeded')
+            ->whereMonth('created_at', Carbon::now()->subMonth()->month)
+            ->whereYear('created_at', Carbon::now()->subMonth()->year)
+            ->sum('price');
+            
+            $data["totalSubscriptions"] = UserSubscription::where("status", "active")->get()->count();
+
+            $data["topSubscriptionPlan"] = UserSubscription::select('subscription_id')
+            ->selectRaw('COUNT(subscription_id) as count')
+            ->groupBy('subscription_id')
+            ->orderBy('count', 'DESC')
+            ->first();
+
+            for ($i = 0; $i < 6; $i++) {
+                $date = Carbon::now()->subMonths($i);
+                $monthName = $date->format('F'); // Get the full month name, e.g., "January"
+            
+                $totalPrice = Payment::where('status', 'succeeded')
+                    ->whereMonth('created_at', $date->month)
+                    ->whereYear('created_at', $date->year)
+                    ->sum('price');
+            
+                $data["revenuePerMonth"]['labels'][] = $monthName;
+                $data["revenuePerMonth"]['values'][] = $totalPrice;
+            }
+
+            $data["revenuePerMonth"]['labels'] = array_reverse($data["revenuePerMonth"]['labels']);
+            $data["revenuePerMonth"]['values'] = array_reverse($data["revenuePerMonth"]['values']);            
+
+            $data["revenuePerMonth"] = json_encode($data["revenuePerMonth"]);
+
+            $data["users"] = User::whereHas('roles', function($query) {
+                $query->where('name', 'admin');
+            })->limit(5)->get();
+            
             
 
-            return view('livewire.pages.manage-dashboard.superadmin');
+            return view('livewire.pages.manage-dashboard.superadmin', compact("data"));
         }
 
         if($user->hasRole('admin')){
@@ -510,5 +558,40 @@ class DashboardController extends Controller
             "data" => $ramUsage
         );        
 
+    }
+
+    public function getMonthlyRevenue(Request $request, $months) {
+        $revenuePerMonth = array();
+        for ($i = 0; $i < $months; $i++) {
+            $date = Carbon::now()->subMonths($i);
+            $monthName = $date->format('F'); // Get the full month name, e.g., "January"
+        
+            $totalPrice = Payment::where('status', 'succeeded')
+                ->whereMonth('created_at', $date->month)
+                ->whereYear('created_at', $date->year)
+                ->sum('price');
+        
+            $revenuePerMonth['labels'][] = $monthName;
+            $revenuePerMonth['values'][] = $totalPrice;
+        }
+
+        $revenuePerMonth['labels'] = array_reverse($revenuePerMonth['labels']);
+        $revenuePerMonth['values'] = array_reverse($revenuePerMonth['values']);
+
+        $revenuePerMonth["series"] = array(
+            array(
+                "name"  => "Revenue",
+                "data"  => array(
+                    "x" => $revenuePerMonth['labels'],
+                    "y" => $revenuePerMonth['values']
+                ),
+                "color" => "#1A56DB"
+            )
+        );
+
+        return array(
+            "success" => true,
+            "data" => json_encode($revenuePerMonth)
+        );
     }
 }
