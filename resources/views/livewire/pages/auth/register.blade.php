@@ -15,12 +15,18 @@ new #[Layout('layouts.guest')] class extends Component
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
+    public string $pricing_plan_id = '';
 
+    public function mount(string $pricing_plan_id = ''): void
+    {
+        $this->pricing_plan_id = $pricing_plan_id;
+    }
     /**
      * Handle an incoming registration request.
      */
     public function register(): void
     {
+
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -35,11 +41,16 @@ new #[Layout('layouts.guest')] class extends Component
 
         Auth::login($user);
 
-        $this->redirect(RouteServiceProvider::HOME, navigate: true);
+        if($this->pricing_plan_id) {
+            $this->redirect(route("user-subscription.checkout", ["plan_id" => $this->pricing_plan_id]));
+        } else {
+            $this->redirect(RouteServiceProvider::HOME, navigate: true);
+        }
+
     }
 }; ?>
 
-<div>
+<div>    
     <form wire:submit="register">
         <!-- Name -->
         <div>
@@ -79,6 +90,7 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <div class="flex items-center justify-end mt-4">
+            <input type="hidden" name="pricing_plan_id" value="{{ $pricing_plan_id }}"/>
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
                 {{ __('Already registered?') }}
             </a>

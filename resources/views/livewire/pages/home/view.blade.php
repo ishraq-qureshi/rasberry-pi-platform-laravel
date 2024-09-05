@@ -18,7 +18,7 @@
     <body class="antialiased">
         
         {{-- HEADER --}}
-        <header class="px-4 py-4 bg-white fixed top-0 w-full">
+        <header class="px-4 py-4 bg-white fixed top-0 w-full z-10">
           <div class="max-w-[1280px] m-auto">
             <div class="flex justify-between items-center">
               <div>
@@ -165,5 +165,121 @@
           </div>
         </section>
         {{-- FEATURES --}}
+
+        {{-- PRICING --}}
+        <section class="px-4 py-16 bg-primary">
+          <div class="max-w-[1280px] m-auto">
+            <div class="flex flex-col gap-20">
+              <div class="flex flex-1 flex-col gap-2">
+                <h2 class="text-6xl text-white text-center font-bold leading-tight font-['Nerko One']">Pricing Plans</h2>
+                <p class="text-xl text-white text-center max-w-[70%] m-auto text-opacity-80 leading-relaxed">Simple, straightforward pricing</p>
+              </div>
+              <div class="flex gap-6 items-stretch">
+                @foreach ($subscriptionPlans as $plan)
+                <div class="flex flex-1 flex-col relative bg-white gap-6 p-8 rounded-md shadow-md" data-id="{{ $plan->id }}" data-price="{{ $plan->isDiscount ? $plan->discount_price : $plan->price }}">
+                  @if($plan->is_trial)
+                    <span class="bg-secondary absolute text-white px-4 py-1 text-sm rounded-full font-medium top-[-14px] left-0 right-0 m-auto max-w-[100px] text-center">Trial Plan</span>                  
+                  @endif
+                  <h3 class="text-3xl text-center text-secondary">{{ $plan->plan_name }}</h3>
+                  <div class="flex flex-col items-center">
+                    @if($plan->isDiscount && !$plan->is_trial)
+                      <h3 class="text-2xl text-gray-400 line-through">€{{ number_format($plan->price, 2) }} </span>
+                    @endif
+                    @if($plan->is_trial)
+                      <h3 class="text-6xl font-bold  text-secondary font-['Nerko One']">Free <span class="text-xl text-opacity-40 font-normal">/14 days</span></h3>
+                    @else
+                      <h3 class="text-6xl font-bold  text-secondary font-['Nerko One']"><sup>€</sup>{{ number_format($plan->isDiscount ? $plan->discount_price : $plan->price, 2) }}<span class="text-xl text-opacity-40 font-normal">/month</span></h3>
+                    @endif                        
+                  </div>      
+                  <div class="flex gap-2 my-4 items-stretch">
+                    <div class="flex items-center flex-col gap-2 flex-1">
+                      <img src="storage/images/raspberry-pi-icon.png" alt="RaspberryPi Icon" width="40" />
+                      <div>
+                        <p class="text-sm text-secondary text-opacity-70 text-center">Allowed Devices</p>
+                        <p class="text-2xl text-secondary font-bold text-center">{{ $plan->allowed_rasberry }}</p>
+                      </div>
+                    </div>
+                    @if($plan->allowed_users > 0)
+                    <span class="w-[1px] h-full bg-gray-200"></span>
+                    <div class="flex flex-col items-center gap-2 flex-1">
+                      <img src="storage/images/user-icon.png" alt="RaspberryPi Icon" width="40" />
+                      <div>
+                        <p class="text-sm text-secondary text-opacity-70 text-center">Allowed Users</p>
+                        <p class="text-2xl text-secondary font-bold text-center">{{ $plan->allowed_users }}</p>
+                      </div>
+                    </div>
+                    @endif
+                  </div>       
+                  <div class="flex flex-col gap-4 flex-1">
+                    <h4 class="text-2xl text-secondary font-medium">What You Will Get:</h4>
+                    <ul class="flex flex-col gap-4">
+                      @foreach(unserialize($plan->features) as $feature)
+                      <li class="flex gap-2 text-opacity-80 text-secondary">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                        {{ $feature }}
+                      </li>
+                      @endforeach
+                    </ul>
+                  </div>
+                  <a href="{{route("register", ["pricing_plan_id" => $plan->id])}}" class="text-center bg-secondary rounded-md hover:bg-opacity-90 text-white px-4 py-4 text-xl font-bold">Get Started</a>
+                </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
+        </section>
+        {{-- PRICING --}}
+
+        {{-- CONTACT --}}
+        <section class="px-4 py-16">
+          <div class="max-w-[1280px] m-auto">
+            <div class="flex flex-col gap-16">
+              <div class="flex flex-1 flex-col gap-6">
+                <h2 class="text-6xl text-center font-bold text-secondary leading-tight font-['Nerko One']">Contact Us</h2>
+                <p class="text-xl text-center max-w-[70%] m-auto text-secondary text-opacity-80 leading-relaxed">Have Questions? We're Just a Message Away!<p>
+              </div>
+              <div class="flex flex-col gap-8">
+                <div class="flex gap-8">
+                  <div class="flex flex-col gap-2 flex-1">
+                    <label class="text-sm text-secondary text-opacity-50">Full Name</label>
+                    <input name="full_name" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your full name" />
+                  </div>
+                  <div class="flex flex-col gap-2 flex-1">
+                    <label class="text-sm text-secondary text-opacity-50">Email</label>
+                    <input name="email" type="email" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your email address" />
+                  </div>
+                </div>
+                <div class="flex gap-8">
+                  <div class="flex flex-col gap-2 flex-1">
+                    <label class="text-sm text-secondary text-opacity-50">Phone Number</label>
+                    <input name="phone_number" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your phone number" />
+                  </div>
+                  <div class="flex flex-col gap-2 flex-1">
+                    <label class="text-sm text-secondary text-opacity-50">Company</label>
+                    <input name="company" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your company" />
+                  </div>
+                </div>
+                <div class="flex gap-8">
+                  <div class="flex flex-col gap-2 flex-1">
+                    <label class="text-sm text-secondary text-opacity-50">Message</label>
+                    <textarea class="w-full h-[200px] resize-none border border-black border-opacity-20 px-4 py-3 text-lg rounded-md"></textarea>                    
+                  </div>
+                </div>
+                <div class="flex gap-8 justify-end">
+                  <button type="submit" class="bg-secondary text-white px-16 py-3 hover:bg-opacity-90 font-bold text-xl rounded-md">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {{-- CONTACT --}}
+
+        {{-- FOOTER --}}
+        <footer>
+          <div class="max-w-[1280px] m-auto">
+            <p class="px-4 py-4 border-t-2 text-center text-gray-500">Copyright &copy; <a href="{{route("home")}}">DashPi</a> 2024. All Rights Reserved</p>
+          </div>
+        </footer>
+        {{-- FOOTER --}}
     </body>
 </html>
