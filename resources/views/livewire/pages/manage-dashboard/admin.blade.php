@@ -3,7 +3,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Dashboard') }}
+          {{ __('messages.dashboard') }}
       </h2>
   </x-slot>
 
@@ -24,7 +24,7 @@
               <div class="w-full bg-white rounded-lg shadow p-4 md:p-6">       
                 <div class="flex flex-col justify-between mb-5">
                   <div>
-                    <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">Total Storages</h5>
+                    <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">{{ __("messages.total_storage") }}</h5>
                   </div>
                   <div id="tota-storage-chart"></div>                   
                 </div>         
@@ -39,7 +39,7 @@
                   <div class="flex justify-between">
                     <div class="flex flex-1 items-center justify-between">
                       <div>
-                        <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">Notifications</h5>
+                        <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">{{ __("messages.notification") }}</h5>
                       </div>                          
                     </div>                  
                   </div>
@@ -51,15 +51,15 @@
                             switch($notification['status']):
                               case "warning":
                                 $iconClass = "bg-yellow-100";
-                                $label = "Warning";
+                                $label = __("messages.warning");
                                 break;
                               case "danger":
                                 $iconClass = "bg-red-100";
-                                $label = "Danger";
+                                $label = __("messages.danger");
                                 break;
                               case "ideal":
                                 $iconClass = "bg-gray-100";
-                                $label = "Idel";
+                                $label = __("messages.idel");
                                 break;
                             endswitch;
                             
@@ -69,16 +69,16 @@
                             
                             switch($notification['type']):
                               case "cpu":
-                                $message = "The $deviceName CPU usage has reached $value%";
+                                $message = "__('messages.the') $deviceName __('messages.cpu_reached') $value%";
                                 break;
                               case "temperature":
-                                $message = "The $deviceName Temperature has reached $value C";
+                                $message = "__('messages.the') $deviceName Temperature has reached $value C";
                                 break;
                               case "storage":
-                                $message = "The $deviceName Storage usage has reached $value%";
+                                $message = "__('messages.the') $deviceName Storage usage has reached $value%";
                                 break;
                               case "ram":
-                                $message = "The $deviceName RAM usage has reached $value%";
+                                $message = "__('messages.the') $deviceName RAM usage has reached $value%";
                                 break;
                             endswitch;
                           @endphp
@@ -95,7 +95,7 @@
                         </div>
                       @endforeach
                     @else
-                        <p>No notifications available</p>
+                        <p>{{ __("messages.no_notification") }}</p>
                     @endif
                   </div>
                 </div>
@@ -109,13 +109,13 @@
                     <div class="flex justify-between mb-5">
                       <div class="flex flex-1 items-center justify-between">
                         <div>
-                          <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">Total CPU Usage</h5>
+                          <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">{{ __("messages.total_cpu_usage") }}</h5>
                         </div>      
                         <div>
                           <select id="cpuInterval">
-                            <option value="24">Last 24 Hours</option>
-                            <option value="3">Last 3 Hours</option>
-                            <option value="1">Last 1 Hours</option>
+                            <option value="24">{{ __("messages.last_24_hour") }}</option>
+                            <option value="3">{{ __("messages.last_3_hour") }}</option>
+                            <option value="1">{{ __("messages.last_1_hour") }}</option>
                           </select>
                         </div>
                       </div>                  
@@ -131,13 +131,13 @@
                     <div class="flex justify-between mb-5">
                       <div class="flex flex-1 items-center justify-between">
                         <div>
-                          <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">Total RAM Usage</h5>
+                          <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">{{ __("messages.total_ram_usage") }}</h5>
                         </div>      
                         <div>
                           <select id="ramInterval">
-                            <option value="24">Last 24 Hours</option>
-                            <option value="3">Last 3 Hours</option>
-                            <option value="1">Last 1 Hours</option>
+                            <option value="24">{{ __("messages.last_24_hour") }}</option>
+                            <option value="3">{{ __("messages.last_3_hour") }}</option>
+                            <option value="1">{{ __("messages.last_1_hour") }}</option>
                           </select>
                         </div>
                       </div>                  
@@ -153,19 +153,19 @@
               {{-- TOP RASBERRY PI --}}
               <div class="bg-white flex-1 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                  <h2>Rasberry Pi</h2>
+                  <h2>{{ __("messages.rasberry_pi") }}</h2>
                   <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-gray-400 uppercase">
                             <tr>
                                 <th scope="col" class="px-6 py-4">
-                                  {{ __('Name') }}
+                                  {{ __('messages.name') }}
                                 </th>
                                 <th scope="col" class="px-6 py-4 text-center">
-                                  {{ __('Model') }}
+                                  {{ __('messages.model') }}
                                 </th>
                                 <th scope="col" class="px-6 py-4 text-center">
-                                  {{ __('Status') }}
+                                  {{ __('messages.status') }}
                                 </th>
                             </tr>
                         </thead>
@@ -180,14 +180,14 @@
                                     {{ $rasberryPi->model->model_name }}
                                   </td>
                                   <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
-                                    <span class="w-2 h-2 inline-block {{ $rasberryPi->isOnline() ? 'bg-green' : 'bg-red-600' }} rounded-full"></span> {{ $rasberryPi->isOnline() ? "Online" : "Offline"}}                                  
+                                    <span class="w-2 h-2 inline-block {{ $rasberryPi->isOnline() ? 'bg-green' : 'bg-red-600' }} rounded-full"></span> {{ $rasberryPi->isOnline() ? __("messages.online") : __("messages.offline")}}                                  
                                   </td>                              
                               </tr>                          
                               @endforeach
                             @else
                               <tr>
                                 <td colspan="5">
-                                  <p class="text-center">No Record(s) available.</p>
+                                  <p class="text-center">{{ __("messages.no_record") }}</p>
                                 </td>
                               </tr>
                             @endif
@@ -201,16 +201,16 @@
 
               <div class="bg-white flex-1 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                  <h2>Users</h2>
+                  <h2>{{ __("messages.users") }}</h2>
                   <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-gray-400 uppercase">
                             <tr>
                                 <th scope="col" class="px-6 py-4">
-                                  {{ __('Full Name') }}
+                                  {{ __('messages.full_name') }}
                                 </th>
                                 <th scope="col" class="px-6 py-4 text-center">
-                                  {{ __('Email') }}
+                                  {{ __('messages.email') }}
                                 </th>
                             </tr>
                         </thead>
@@ -230,7 +230,7 @@
                             @else
                               <tr>
                                 <td colspan="5">
-                                  <p class="text-center">No Record(s) available.</p>
+                                  <p class="text-center">{{ __("messages.no_record") }}</p>
                                 </td>
                               </tr>
                             @endif

@@ -29,20 +29,20 @@
               <nav class="hidden lg:block">
                 <ul class="flex gap-8 items-center">
                   <li>
-                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">How to Connect</a>
+                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">{{ __("messages.how_to_connect") }}</a>
                   </li>
                   <li>
-                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">Features</a>
+                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">{{ __("messages.features") }}</a>
                   </li>
                   <li>
-                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">Pricing</a>
+                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">{{ __("messages.pricing") }}</a>
                   </li>
                   <li>
-                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">Contact</a>
+                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">{{ __("messages.contact") }}</a>
                   </li>
                   <li class="flex gap-2">
-                    <a class="bg-secondary hover:bg-gray-700 text-white block px-6 py-2 rounded-full font-medium" href="{{ route("register") }}">Register</a>
-                    <a class="bg-primary hover:bg-primaryDark text-white block px-6 py-2 rounded-full font-medium" href="{{ route("login") }}">Login</a>
+                    <a class="bg-secondary hover:bg-gray-700 text-white block px-6 py-2 rounded-full font-medium" href="{{ route("register") }}">{{ __("messages.register") }}</a>
+                    <a class="bg-primary hover:bg-primaryDark text-white block px-6 py-2 rounded-full font-medium" href="{{ route("login") }}">{{ __("messages.login") }}</a>
                   </li>
                   <li>
                     
@@ -59,8 +59,8 @@
         <section class="px-4 py-8 h-screen flex items-center bg-no-repeat bg-right-bottom" style="background: url('{{ url("storage/images/character-holding-raspberry-pi.png") }}') no-repeat 80% 100% / 40%">
           <div class="max-w-[1280px] m-auto w-full">
             <div class="flex flex-col lg:max-w-[40%] w-full gap-8">
-              <h1 class="md:text-7xl text-6xl text-center lg:text-left font-bold text-secondary font-['Nerko One']">Managing your IoT solution is easy as PI</h1>
-              <h3 class="text-xl text-center lg:text-left text-secondary leading-relaxed">With DashPi, it's never been easier to manage, view, and update your Raspberry Pi computers. Our comprehensive platform puts the power of IoT in your hands, so you can keep doing what you do—but better!</h3>
+              <h1 class="md:text-7xl text-6xl text-center lg:text-left font-bold text-secondary font-['Nerko One']">{{ __("messages.hero_title") }}</h1>
+              <h3 class="text-xl text-center lg:text-left text-secondary leading-relaxed">{{ __("messages.hero_description") }}</h3>
             </div>
           </div>
         </section>
@@ -71,33 +71,33 @@
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col md:gap-20 gap-10">
               <div class="flex flex-col gap-2">
-                <h2 class="md:text-5xl text-3xl font-bold text-center text-white font-['Nerko One']">How To Connect?</h2>
-                <p class="text-xl text-white text-opacity-80 text-center leading-relaxed">Wondering how DashPI works? Check out the details below.</p>
+                <h2 class="md:text-5xl text-3xl font-bold text-center text-white font-['Nerko One']">{{ __("messages.how_to_connect") }}</h2>
+                <p class="text-xl text-white text-opacity-80 text-center leading-relaxed">{{ __("messages.how_to_contect_description") }}</p>
               </div>
               <div class="flex gap-6 md:flex-row flex-col">
                 
                 <div class="flex flex-col flex-1 items-center gap-4">
                   <div class="w-16 h-16 flex justify-center items-center rounded-full shadow-lg bg-white">
-                    <h3 class="text-3xl font-bold text-secondary">1</h3>
+                    <h3 class="text-3xl font-bold text-secondary">{{ __("messages.step_1") }}</h3>
                   </div>
-                  <h3 class="text-2xl text-center font-bold text-white">Create An Account</h3>
-                  <p class="text-white text-center text-opacity-80">Register your account on the platform by filling the required fields</p>
+                  <h3 class="text-2xl text-center font-bold text-white">{{ __("messages.create_account") }}</h3>
+                  <p class="text-white text-center text-opacity-80">{{ __("messages.create_account_desc") }}</p>
                 </div>
 
                 <div class="flex flex-col flex-1 items-center gap-4">
                   <div class="w-16 h-16 flex justify-center items-center rounded-full bg-white shadow-lg">
-                    <h3 class="text-3xl font-bold text-secondary">2</h3>
+                    <h3 class="text-3xl font-bold text-secondary">{{ __("messages.step_2") }}</h3>
                   </div>
-                  <h3 class="text-2xl text-center font-bold text-white">Choose Subscription Plan</h3>
-                  <p class="text-white text-center text-opacity-80">Choose your subscription plan according to your requirements or select a 14 days trial plan to explore the platform.</p>
+                  <h3 class="text-2xl text-center font-bold text-white">{{ __("messages.choose_subscription") }}</h3>
+                  <p class="text-white text-center text-opacity-80">{{ __("messages.choose_subscription_desc") }}</p>
                 </div>
 
                 <div class="flex flex-col flex-1 items-center gap-4">
                   <div class="w-16 h-16 flex justify-center items-center rounded-full bg-white shadow-lg">
-                    <h3 class="text-3xl font-bold text-secondary">3</h3>
+                    <h3 class="text-3xl font-bold text-secondary">{{ __("messages.step_3") }}</h3>
                   </div>
-                  <h3 class="text-2xl text-center font-bold text-white">Connect Your PI</h3>
-                  <p class="text-white text-center text-opacity-80">Register your device to your account and connet your pi with automate or manual process, It will be listed on your dashboard.</p>
+                  <h3 class="text-2xl text-center font-bold text-white">{{ __("messages.connect_your_pi") }}</h3>
+                  <p class="text-white text-center text-opacity-80">{{  __("messages.connect_your_pi_desc")}}</p>
                 </div>
 
 
@@ -112,8 +112,8 @@
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-16">
               <div class="flex flex-1 flex-col gap-6">
-                <h2 class="md:text-6xl text-3xl text-center font-bold text-secondary leading-tight font-['Nerko One']">What Features You Will Be Using</h2>
-                <p class="text-xl text-center md:max-w-[70%] m-auto text-secondary text-opacity-80 leading-relaxed">DashPI integrates device management, notifications, and analytics into a single, slick, and comprehensive package allowing you to manage your Raspberry Pi computers with unparalleled efficiency. Learn more about our features now!</p>
+                <h2 class="md:text-6xl text-3xl text-center font-bold text-secondary leading-tight font-['Nerko One']">{{ __("messages.features_title") }}</h2>
+                <p class="text-xl text-center md:max-w-[70%] m-auto text-secondary text-opacity-80 leading-relaxed">{{ __("messages.features_desc") }}</p>
               </div>
               <div class="flex flex-1 flex-col md:gap-4 gap-10">
                 
@@ -123,8 +123,8 @@
                     <img src="storage/images/monitoring-icon.png" class="m-auto md:m-0" alt="montior-icon" width="500"/>
                   </div>
                   <div class="flex flex-col gap-4 flex-1 md:max-w-[47%]">
-                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">Simplified Device Uptime Monitoring</h2>
-                    <p class="md:text-xl text-lg leading-normal text-secondary md:text-left text-center text-opacity-70">Our streamlined user interface lets you quickly see which Raspberry Pi computers are online and offline, and keep an eye on their alerts all in a single, high-level view.</p>
+                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">{{ __("messages.feature1_title") }}</h2>
+                    <p class="md:text-xl text-lg leading-normal text-secondary md:text-left text-center text-opacity-70">{{ __("messages.feature1_desc") }}</p>
                   </div>
                 </div>
 
@@ -134,8 +134,8 @@
                     <img src="storage/images/smart-notification-icon.png" alt="montior-icon" class="m-auto md:m-0 max-h-[400px] object-contain" height="400" width="500"/>
                   </div>
                   <div class="flex flex-col gap-4 flex-1 w-full md:max-w-[47%]">
-                    <h2 class="md:text-4xl text-2xl text-secondary md:text-left text-center font-['Nerko One'] font-bold">Smart Notifications</h2>
-                    <p class="md:text-xl text-lg leading-normal md:text-left text-center text-secondary text-opacity-70">DashPI will keep you informed of important events happening on your Pi device. You'll be informed of storage, cpu, temperature events and more! Coming soon, you'll be able to send your own notifications without using an API!</p>
+                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">{{ __("messages.feature2_title") }}</h2>
+                    <p class="md:text-xl text-lg leading-normal text-secondary md:text-left text-center text-opacity-70">{{ __("messages.feature2_desc") }}</p>
                   </div>
                 </div>
 
@@ -145,8 +145,8 @@
                     <img src="storage/images/device-status-icon.png" alt="montior-icon" class="m-auto md:m-0 max-h-[400px] object-contain" height="400" width="500"/>
                   </div>
                   <div class="flex flex-col gap-4 flex-1 w-full md:max-w-[47%]]">
-                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">At-A-Glance Device Status Overviews</h2>
-                    <p class="md:text-xl text-lg leading-normal md:text-left text-center text-secondary text-opacity-70">It's never been easier to check in on the vitals of your Raspberry Pi computers. Get a quick look at important information like uptime, network connectivity, and more!</p>
+                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">{{ __("messages.feature3_title") }}</h2>
+                    <p class="md:text-xl text-lg leading-normal text-secondary md:text-left text-center text-opacity-70">{{ __("messages.feature3_desc") }}</p>
                   </div>
                 </div>
 
@@ -156,8 +156,8 @@
                     <img src="storage/images/advance-hardware-icon.png" alt="montior-icon" class="m-auto md:m-0 max-h-[400px] object-contain rounded-lg overflow-hidden" height="400" width="500"/>
                   </div>
                   <div class="flex flex-col gap-4 flex-1 w-full md:max-w-[47%]]">
-                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">Advanced Hardware Monitoring</h2>
-                    <p class="md:text-xl text-lg leading-normal text-secondary md:text-left text-center text-opacity-70">You can monitor the hardware status of each Pi device individually, with information such as available RAM, current CPU usage, storage, and other detail about connected devices.</p>
+                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">{{ __("messages.feature4_title") }}</h2>
+                    <p class="md:text-xl text-lg leading-normal text-secondary md:text-left text-center text-opacity-70">{{ __("messages.feature4_desc") }}</p>
                   </div>
                 </div>
               </div>
@@ -171,8 +171,8 @@
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-20">
               <div class="flex flex-1 flex-col gap-2">
-                <h2 class="md:text-6xl text-3xl text-white text-center font-bold leading-tight font-['Nerko One']">Pricing Plans</h2>
-                <p class="text-xl text-white text-center max-w-[70%] m-auto text-opacity-80 leading-relaxed">Simple, straightforward pricing</p>
+                <h2 class="md:text-6xl text-3xl text-white text-center font-bold leading-tight font-['Nerko One']">{{ __("messages.pricing_plan_title") }}</h2>
+                <p class="text-xl text-white text-center max-w-[70%] m-auto text-opacity-80 leading-relaxed">{{ __("messages.pricing_plan_desc") }}</p>
               </div>
               <div class="flex gap-6 items-stretch flex-wrap lg:flex-nowrap">
                 @foreach ($subscriptionPlans as $plan)
@@ -186,7 +186,7 @@
                       <h3 class="text-2xl text-gray-400 line-through">€{{ number_format($plan->price, 2) }} </span>
                     @endif
                     @if($plan->is_trial)
-                      <h3 class="md:text-6xl text-4xl font-bold  text-secondary font-['Nerko One']">Free <span class="text-xl text-opacity-40 font-normal">/14 days</span></h3>
+                      <h3 class="md:text-6xl text-4xl font-bold  text-secondary font-['Nerko One']">{{ __("messages.free") }} <span class="text-xl text-opacity-40 font-normal">/14 days</span></h3>
                     @else
                       <h3 class="md:text-6xl text-4xl font-bold  text-secondary font-['Nerko One']"><sup>€</sup>{{ number_format($plan->isDiscount ? $plan->discount_price : $plan->price, 2) }}<span class="text-xl text-opacity-40 font-normal">/month</span></h3>
                     @endif                        
@@ -195,7 +195,7 @@
                     <div class="flex items-center flex-col gap-2 flex-1">
                       <img src="storage/images/raspberry-pi-icon.png" alt="RaspberryPi Icon" width="40" />
                       <div>
-                        <p class="text-sm text-secondary text-opacity-70 text-center">Allowed Devices</p>
+                        <p class="text-sm text-secondary text-opacity-70 text-center">{{ __("messages.allowed_devices") }}</p>
                         <p class="text-2xl text-secondary font-bold text-center">{{ $plan->allowed_rasberry }}</p>
                       </div>
                     </div>
@@ -204,14 +204,14 @@
                     <div class="flex flex-col items-center gap-2 flex-1">
                       <img src="storage/images/user-icon.png" alt="RaspberryPi Icon" width="40" />
                       <div>
-                        <p class="text-sm text-secondary text-opacity-70 text-center">Allowed Users</p>
+                        <p class="text-sm text-secondary text-opacity-70 text-center">{{ __("messages.allowed_user") }}</p>
                         <p class="text-2xl text-secondary font-bold text-center">{{ $plan->allowed_users }}</p>
                       </div>
                     </div>
                     @endif
                   </div>       
                   <div class="flex flex-col gap-4 flex-1">
-                    <h4 class="text-2xl text-secondary font-medium">What You Will Get:</h4>
+                    <h4 class="text-2xl text-secondary font-medium">{{ __("messages.what_will_get") }}</h4>
                     <ul class="flex flex-col gap-4">
                       @foreach(unserialize($plan->features) as $feature)
                       <li class="flex gap-2 text-opacity-80 text-secondary">
@@ -221,7 +221,7 @@
                       @endforeach
                     </ul>
                   </div>
-                  <a href="{{route("register", ["pricing_plan_id" => $plan->id])}}" class="text-center bg-secondary rounded-md hover:bg-opacity-90 text-white px-4 py-4 text-xl font-bold">Get Started</a>
+                  <a href="{{route("register", ["pricing_plan_id" => $plan->id])}}" class="text-center bg-secondary rounded-md hover:bg-opacity-90 text-white px-4 py-4 text-xl font-bold">{{ __("messages.get_started") }}</a>
                 </div>
                 @endforeach
               </div>
@@ -235,38 +235,38 @@
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-16">
               <div class="flex flex-1 flex-col gap-6">
-                <h2 class="md:text-6xl text-3xl text-center font-bold text-secondary leading-tight font-['Nerko One']">Contact Us</h2>
-                <p class="text-xl text-center max-w-[70%] m-auto text-secondary text-opacity-80 leading-relaxed">Have Questions? We're Just a Message Away!<p>
+                <h2 class="md:text-6xl text-3xl text-center font-bold text-secondary leading-tight font-['Nerko One']">{{ __("messages.contact_us_title") }}</h2>
+                <p class="text-xl text-center max-w-[70%] m-auto text-secondary text-opacity-80 leading-relaxed">{{ __("messages.contact_us_desc") }}<p>
               </div>
               <div class="flex flex-col gap-8">
                 <div class="flex gap-8 md:flex-row flex-col">
                   <div class="flex flex-col gap-2 flex-1">
-                    <label class="text-sm text-secondary text-opacity-50">Full Name</label>
-                    <input name="full_name" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your full name" />
+                    <label class="text-sm text-secondary text-opacity-50">{{ __("messages.full_name") }}</label>
+                    <input name="full_name" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="{{ __("messages.full_name_placeholder") }}" />
                   </div>
                   <div class="flex flex-col gap-2 flex-1">
-                    <label class="text-sm text-secondary text-opacity-50">Email</label>
-                    <input name="email" type="email" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your email address" />
-                  </div>
-                </div>
-                <div class="flex gap-8 md:flex-row flex-col">
-                  <div class="flex flex-col gap-2 flex-1">
-                    <label class="text-sm text-secondary text-opacity-50">Phone Number</label>
-                    <input name="phone_number" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your phone number" />
-                  </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <label class="text-sm text-secondary text-opacity-50">Company</label>
-                    <input name="company" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your company" />
+                    <label class="text-sm text-secondary text-opacity-50">{{ __("messages.email") }}</label>
+                    <input name="email" type="email" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="{{ __("messages.email_placeholder") }}" />
                   </div>
                 </div>
                 <div class="flex gap-8 md:flex-row flex-col">
                   <div class="flex flex-col gap-2 flex-1">
-                    <label class="text-sm text-secondary text-opacity-50">Message</label>
+                    <label class="text-sm text-secondary text-opacity-50">{{ __("messages.phone") }}</label>
+                    <input name="phone_number" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="{{ __("messages.phone_placeholder") }}" />
+                  </div>
+                  <div class="flex flex-col gap-2 flex-1">
+                    <label class="text-sm text-secondary text-opacity-50">{{ __("messages.comany_name") }}</label>
+                    <input name="company" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="{{ __("messages.company_name_placeholder") }}" />
+                  </div>
+                </div>
+                <div class="flex gap-8 md:flex-row flex-col">
+                  <div class="flex flex-col gap-2 flex-1">
+                    <label class="text-sm text-secondary text-opacity-50">{{ __("messages.message") }}</label>
                     <textarea class="w-full h-[200px] resize-none border border-black border-opacity-20 px-4 py-3 text-lg rounded-md"></textarea>                    
                   </div>
                 </div>
                 <div class="flex gap-8 justify-end">
-                  <button type="submit" class="bg-secondary text-white px-16 py-3 hover:bg-opacity-90 font-bold text-xl rounded-md">Submit</button>
+                  <button type="submit" class="bg-secondary text-white px-16 py-3 hover:bg-opacity-90 font-bold text-xl rounded-md">{{ __("submit") }}</button>
                 </div>
               </div>
             </div>
@@ -277,7 +277,7 @@
         {{-- FOOTER --}}
         <footer>
           <div class="max-w-[1280px] m-auto">
-            <p class="px-4 py-4 border-t-2 text-center text-gray-500">Copyright &copy; <a href="{{route("home")}}">DashPi</a> 2024. All Rights Reserved</p>
+            <p class="px-4 py-4 border-t-2 text-center text-gray-500">{{ __("messages.reserved") }} &copy; <a href="{{route("home")}}">DashPi</a> {{ __("messages.reserved") }}</p>
           </div>
         </footer>
         {{-- FOOTER --}}

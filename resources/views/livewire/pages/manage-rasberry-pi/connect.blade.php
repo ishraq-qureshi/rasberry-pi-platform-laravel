@@ -20,8 +20,8 @@
         <div class="flex flex-col gap-4 tab-content" id="automateTab">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
             <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Execute cURL Request</h5>
-              <p class="font-normal text-gray-700 dark:text-gray-400">Run this command on your rasberry pi shell to automate installation</p>
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ __("messages.execute_curl_request") }}</h5>
+              <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.execute_curl_request_desc") }}</p>
               <div class="px-3 py-2">
                 <pre class="language-python"><code class="text-sm">curl -fsSL {{ env("APP_URL") }}/setup-rasberry-pi/{{ $rasberryPi->token->token }} | bash</code></pre>
               </div>
@@ -31,8 +31,8 @@
         <div class="flex flex-col gap-4 hidden tab-content" id="manualTab">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
               <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Create a Pyhton Script</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Ensure that your Python script <span class="font-bold text-black underline">(connection.py)</span> is in the desired location. For example, let's assume it's located in <span class="font-bold text-black underline">/home/pi/scripts/connection.py</span>.</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ __("messages.create_python_file") }}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_python_file_desc_1") }} <span class="font-bold text-black underline">(connection.py)</span> is in the desired location. For example, let's assume it's located in <span class="font-bold text-black underline">/home/pi/scripts/connection.py</span>.</p>
                 <div class="px-3 py-2">
                   <pre class="language-python"><code class="text-sm">import requests
 import json

@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Dashboard') }}
+        {{ __('messages.dashboard') }}
       </h2>
   </x-slot>
 
@@ -11,19 +11,19 @@
             <div class="flex flex-wrap">
               <div class="overflow-hidden flex gap-4 w-full">
                 <div class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                  <p class="font-normal text-sm text-gray-700 dark:text-gray-400">Total Users</p>
+                  <p class="font-normal text-sm text-gray-700 dark:text-gray-400">{{ __("messages.total_user") }}</p>
                   <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $data["totalUsersCount"] }}</h5>
                 </div>
                 <div class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                  <p class="font-normal text-sm text-gray-700 dark:text-gray-400">Revenue (Weekly)</p>
+                  <p class="font-normal text-sm text-gray-700 dark:text-gray-400">{{ __("messages.revenue_week") }}</p>
                   <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">€{{ number_format($data["totalRevenueWeek"], 2) }}</h5>
                 </div>
                 <div class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                  <p class="font-normal text-sm text-gray-700 dark:text-gray-400">Revenue (Monthly)</p>
+                  <p class="font-normal text-sm text-gray-700 dark:text-gray-400">{{ __("messages.revenue_month") }}</p>
                   <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">€{{ number_format($data["totalRevenueMonth"], 2) }}</h5>
                 </div>
                 <div class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                  <p class="font-normal text-sm text-gray-700 dark:text-gray-400">Active Subscriptions</p>
+                  <p class="font-normal text-sm text-gray-700 dark:text-gray-400">{{ __("messages.active_subscription") }}</p>
                   <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $data["totalSubscriptions"] }}</h5>
                 </div>
               </div>
@@ -34,7 +34,7 @@
                 <div class="flex justify-between mb-5">
                   <div class="flex flex-1 items-center justify-between">
                     <div>
-                      <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">Last 6 Months Revenue</h5>
+                      <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">{{ __("messages.last_6_month_revenue") }}</h5>
                     </div>                    
                   </div>                  
                 </div>
@@ -45,22 +45,22 @@
             <div class="flex gap-4">              
                 <div class="bg-white flex-1 overflow-hidden shadow-sm sm:rounded-lg">
                   <div class="p-6 text-gray-900">
-                    <h2>Users</h2>
+                    <h2>{{ __("messages.users") }}</h2>
                     <div class="relative overflow-x-auto">
                       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                           <thead class="text-gray-400 uppercase">
                               <tr>
                                   <th scope="col" class="px-6 py-4">
-                                    {{ __('Full Name') }}
+                                    {{ __('messages.full_name') }}
                                   </th>
                                   <th scope="col" class="px-6 py-4 text-center">
-                                    {{ __('Rasberry Pis') }}
+                                    {{ __('messages.rasberry_pi') }}
                                   </th>
                                   <th scope="col" class="px-6 py-4 text-center">
-                                    {{ __('Sub Admins') }}
+                                    {{ __('messages.sub_admin') }}
                                   </th>
                                   <th scope="col" class="px-6 py-4 text-center">
-                                    {{ __('Plans') }}
+                                    {{ __('messages.plan') }}
                                   </th>
                               </tr>
                           </thead>
@@ -86,7 +86,7 @@
                               @else
                                 <tr>
                                   <td colspan="5">
-                                    <p class="text-center">No Record(s) available.</p>
+                                    <p class="text-center">{{ __("messages.no_record") }}</p>
                                   </td>
                                 </tr>
                               @endif
