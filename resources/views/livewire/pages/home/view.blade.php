@@ -21,12 +21,12 @@
         <header class="px-4 py-4 bg-white fixed top-0 w-full z-10">
           <div class="max-w-[1280px] m-auto">
             <div class="flex justify-between items-center">
-              <div>
-                <a href="{{ route("home") }}">
-                  <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+              <div class="lg:w-auto w-full">
+                <a href="{{ route("home") }}" class="block lg:text-left text-center">
+                  <x-application-logo class="block h-9 w-auto fill-current text-gray-800 lg:m-0 m-auto" />
                 </a>
               </div>
-              <nav>
+              <nav class="hidden lg:block">
                 <ul class="flex gap-8 items-center">
                   <li>
                     <a class="text-gray-800 hover:text-gray-400 font-medium" href="">How to Connect</a>
@@ -58,9 +58,9 @@
         {{-- HERO SECTION --}}
         <section class="px-4 py-8 h-screen flex items-center bg-no-repeat bg-right-bottom" style="background: url('{{ url("storage/images/character-holding-raspberry-pi.png") }}') no-repeat 80% 100% / 40%">
           <div class="max-w-[1280px] m-auto w-full">
-            <div class="flex flex-col max-w-[40%] gap-8">
-              <h1 class="text-7xl font-bold text-secondary font-['Nerko One']">Managing your IoT solution is easy as PI</h1>
-              <h3 class="text-xl text-secondary leading-relaxed">With DashPi, it's never been easier to manage, view, and update your Raspberry Pi computers. Our comprehensive platform puts the power of IoT in your hands, so you can keep doing what you do—but better!</h3>
+            <div class="flex flex-col lg:max-w-[40%] w-full gap-8">
+              <h1 class="md:text-7xl text-6xl text-center lg:text-left font-bold text-secondary font-['Nerko One']">Managing your IoT solution is easy as PI</h1>
+              <h3 class="text-xl text-center lg:text-left text-secondary leading-relaxed">With DashPi, it's never been easier to manage, view, and update your Raspberry Pi computers. Our comprehensive platform puts the power of IoT in your hands, so you can keep doing what you do—but better!</h3>
             </div>
           </div>
         </section>
@@ -69,12 +69,12 @@
         {{-- HOW TO CONNECT --}}
         <section class="px-4 py-16 bg-primary">
           <div class="max-w-[1280px] m-auto">
-            <div class="flex flex-col gap-20">
+            <div class="flex flex-col md:gap-20 gap-10">
               <div class="flex flex-col gap-2">
-                <h2 class="text-5xl font-bold text-center text-white font-['Nerko One']">How To Connect?</h2>
+                <h2 class="md:text-5xl text-3xl font-bold text-center text-white font-['Nerko One']">How To Connect?</h2>
                 <p class="text-xl text-white text-opacity-80 text-center leading-relaxed">Wondering how DashPI works? Check out the details below.</p>
               </div>
-              <div class="flex gap-6">
+              <div class="flex gap-6 md:flex-row flex-col">
                 
                 <div class="flex flex-col flex-1 items-center gap-4">
                   <div class="w-16 h-16 flex justify-center items-center rounded-full shadow-lg bg-white">
@@ -108,56 +108,56 @@
         {{-- HOW TO CONNECT --}}
 
         {{-- FEATURES --}}
-        <section class="px-4 py-20">
+        <section class="px-4 md:py-20 py-10">
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-16">
               <div class="flex flex-1 flex-col gap-6">
-                <h2 class="text-6xl text-center font-bold text-secondary leading-tight font-['Nerko One']">What Features You Will Be Using</h2>
-                <p class="text-xl text-center max-w-[70%] m-auto text-secondary text-opacity-80 leading-relaxed">DashPI integrates device management, notifications, and analytics into a single, slick, and comprehensive package allowing you to manage your Raspberry Pi computers with unparalleled efficiency. Learn more about our features now!</p>
+                <h2 class="md:text-6xl text-3xl text-center font-bold text-secondary leading-tight font-['Nerko One']">What Features You Will Be Using</h2>
+                <p class="text-xl text-center md:max-w-[70%] m-auto text-secondary text-opacity-80 leading-relaxed">DashPI integrates device management, notifications, and analytics into a single, slick, and comprehensive package allowing you to manage your Raspberry Pi computers with unparalleled efficiency. Learn more about our features now!</p>
               </div>
-              <div class="flex flex-1 flex-col gap-4">
+              <div class="flex flex-1 flex-col md:gap-4 gap-10">
                 
                 
-                <div class="flex gap-8 items-center">
-                  <div class="flex-1 justify-center max-w-[47%]">
-                    <img src="storage/images/monitoring-icon.png" alt="montior-icon" width="500"/>
+                <div class="flex gap-8 md:flex-row flex-col items-center">
+                  <div class="flex-1 justify-center w-full md:max-w-[47%]">
+                    <img src="storage/images/monitoring-icon.png" class="m-auto md:m-0" alt="montior-icon" width="500"/>
                   </div>
-                  <div class="flex flex-col gap-4 flex-1 max-w-[47%]">
-                    <h2 class="text-4xl text-secondary font-['Nerko One'] font-bold">Simplified Device Uptime Monitoring</h2>
-                    <p class="text-xl leading-normal text-secondary text-opacity-70">Our streamlined user interface lets you quickly see which Raspberry Pi computers are online and offline, and keep an eye on their alerts all in a single, high-level view.</p>
-                  </div>
-                </div>
-
-
-                <div class="flex gap-8 items-center flex-row-reverse">
-                  <div class="flex-1 justify-center max-w-[47%]">
-                    <img src="storage/images/smart-notification-icon.png" alt="montior-icon" class="max-h-[400px] object-contain" height="400" width="500"/>
-                  </div>
-                  <div class="flex flex-col gap-4 flex-1 max-w-[47%]">
-                    <h2 class="text-4xl text-secondary font-['Nerko One'] font-bold">Smart Notifications</h2>
-                    <p class="text-xl leading-normal text-secondary text-opacity-70">DashPI will keep you informed of important events happening on your Pi device. You'll be informed of storage, cpu, temperature events and more! Coming soon, you'll be able to send your own notifications without using an API!</p>
+                  <div class="flex flex-col gap-4 flex-1 md:max-w-[47%]">
+                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">Simplified Device Uptime Monitoring</h2>
+                    <p class="md:text-xl text-lg leading-normal text-secondary md:text-left text-center text-opacity-70">Our streamlined user interface lets you quickly see which Raspberry Pi computers are online and offline, and keep an eye on their alerts all in a single, high-level view.</p>
                   </div>
                 </div>
 
 
-                <div class="flex gap-8 items-center">
-                  <div class="flex-1 justify-center max-w-[47%]">
-                    <img src="storage/images/device-status-icon.png" alt="montior-icon" class="max-h-[400px] object-contain" height="400" width="500"/>
+                <div class="flex gap-8 items-center flex-col md:flex-row-reverse">
+                  <div class="flex-1 justify-center w-full md:max-w-[47%]">
+                    <img src="storage/images/smart-notification-icon.png" alt="montior-icon" class="m-auto md:m-0 max-h-[400px] object-contain" height="400" width="500"/>
                   </div>
-                  <div class="flex flex-col gap-4 flex-1 max-w-[47%]">
-                    <h2 class="text-4xl text-secondary font-['Nerko One'] font-bold">At-A-Glance Device Status Overviews</h2>
-                    <p class="text-xl leading-normal text-secondary text-opacity-70">It's never been easier to check in on the vitals of your Raspberry Pi computers. Get a quick look at important information like uptime, network connectivity, and more!</p>
+                  <div class="flex flex-col gap-4 flex-1 w-full md:max-w-[47%]">
+                    <h2 class="md:text-4xl text-2xl text-secondary md:text-left text-center font-['Nerko One'] font-bold">Smart Notifications</h2>
+                    <p class="md:text-xl text-lg leading-normal md:text-left text-center text-secondary text-opacity-70">DashPI will keep you informed of important events happening on your Pi device. You'll be informed of storage, cpu, temperature events and more! Coming soon, you'll be able to send your own notifications without using an API!</p>
                   </div>
                 </div>
 
 
-                <div class="flex gap-8 items-center flex-row-reverse">
-                  <div class="flex-1 justify-center max-w-[47%]">
-                    <img src="storage/images/advance-hardware-icon.png" alt="montior-icon" class="max-h-[400px] object-contain rounded-lg overflow-hidden" height="400" width="500"/>
+                <div class="flex gap-8 flex-col md:flex-row items-center">
+                  <div class="flex-1 justify-center w-full md:max-w-[47%]]">
+                    <img src="storage/images/device-status-icon.png" alt="montior-icon" class="m-auto md:m-0 max-h-[400px] object-contain" height="400" width="500"/>
                   </div>
-                  <div class="flex flex-col gap-4 flex-1 max-w-[47%]">
-                    <h2 class="text-4xl text-secondary font-['Nerko One'] font-bold">Advanced Hardware Monitoring</h2>
-                    <p class="text-xl leading-normal text-secondary text-opacity-70">You can monitor the hardware status of each Pi device individually, with information such as available RAM, current CPU usage, storage, and other detail about connected devices.</p>
+                  <div class="flex flex-col gap-4 flex-1 w-full md:max-w-[47%]]">
+                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">At-A-Glance Device Status Overviews</h2>
+                    <p class="md:text-xl text-lg leading-normal md:text-left text-center text-secondary text-opacity-70">It's never been easier to check in on the vitals of your Raspberry Pi computers. Get a quick look at important information like uptime, network connectivity, and more!</p>
+                  </div>
+                </div>
+
+
+                <div class="flex gap-8 items-center flex-col md:flex-row-reverse">
+                  <div class="flex-1 justify-center w-full md:max-w-[47%]]">
+                    <img src="storage/images/advance-hardware-icon.png" alt="montior-icon" class="m-auto md:m-0 max-h-[400px] object-contain rounded-lg overflow-hidden" height="400" width="500"/>
+                  </div>
+                  <div class="flex flex-col gap-4 flex-1 w-full md:max-w-[47%]]">
+                    <h2 class="md:text-4xl text-2xl text-secondary font-['Nerko One'] md:text-left text-center font-bold">Advanced Hardware Monitoring</h2>
+                    <p class="md:text-xl text-lg leading-normal text-secondary md:text-left text-center text-opacity-70">You can monitor the hardware status of each Pi device individually, with information such as available RAM, current CPU usage, storage, and other detail about connected devices.</p>
                   </div>
                 </div>
               </div>
@@ -171,24 +171,24 @@
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-20">
               <div class="flex flex-1 flex-col gap-2">
-                <h2 class="text-6xl text-white text-center font-bold leading-tight font-['Nerko One']">Pricing Plans</h2>
+                <h2 class="md:text-6xl text-3xl text-white text-center font-bold leading-tight font-['Nerko One']">Pricing Plans</h2>
                 <p class="text-xl text-white text-center max-w-[70%] m-auto text-opacity-80 leading-relaxed">Simple, straightforward pricing</p>
               </div>
-              <div class="flex gap-6 items-stretch">
+              <div class="flex gap-6 items-stretch flex-wrap lg:flex-nowrap">
                 @foreach ($subscriptionPlans as $plan)
-                <div class="flex flex-1 flex-col relative bg-white gap-6 p-8 rounded-md shadow-md" data-id="{{ $plan->id }}" data-price="{{ $plan->isDiscount ? $plan->discount_price : $plan->price }}">
+                <div class="flex w-full lg:flex-1 lg:max-w-[410px] min-w-[calc(100%/3-20px)] flex-col relative bg-white md:gap-6 gap-4 p-8 rounded-md shadow-md" data-id="{{ $plan->id }}" data-price="{{ $plan->isDiscount ? $plan->discount_price : $plan->price }}">
                   @if($plan->is_trial)
                     <span class="bg-secondary absolute text-white px-4 py-1 text-sm rounded-full font-medium top-[-14px] left-0 right-0 m-auto max-w-[100px] text-center">Trial Plan</span>                  
                   @endif
-                  <h3 class="text-3xl text-center text-secondary">{{ $plan->plan_name }}</h3>
+                  <h3 class="md:text-3xl text-2xl  text-center text-secondary">{{ $plan->plan_name }}</h3>
                   <div class="flex flex-col items-center">
                     @if($plan->isDiscount && !$plan->is_trial)
                       <h3 class="text-2xl text-gray-400 line-through">€{{ number_format($plan->price, 2) }} </span>
                     @endif
                     @if($plan->is_trial)
-                      <h3 class="text-6xl font-bold  text-secondary font-['Nerko One']">Free <span class="text-xl text-opacity-40 font-normal">/14 days</span></h3>
+                      <h3 class="md:text-6xl text-4xl font-bold  text-secondary font-['Nerko One']">Free <span class="text-xl text-opacity-40 font-normal">/14 days</span></h3>
                     @else
-                      <h3 class="text-6xl font-bold  text-secondary font-['Nerko One']"><sup>€</sup>{{ number_format($plan->isDiscount ? $plan->discount_price : $plan->price, 2) }}<span class="text-xl text-opacity-40 font-normal">/month</span></h3>
+                      <h3 class="md:text-6xl text-4xl font-bold  text-secondary font-['Nerko One']"><sup>€</sup>{{ number_format($plan->isDiscount ? $plan->discount_price : $plan->price, 2) }}<span class="text-xl text-opacity-40 font-normal">/month</span></h3>
                     @endif                        
                   </div>      
                   <div class="flex gap-2 my-4 items-stretch">
@@ -235,11 +235,11 @@
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-16">
               <div class="flex flex-1 flex-col gap-6">
-                <h2 class="text-6xl text-center font-bold text-secondary leading-tight font-['Nerko One']">Contact Us</h2>
+                <h2 class="md:text-6xl text-3xl text-center font-bold text-secondary leading-tight font-['Nerko One']">Contact Us</h2>
                 <p class="text-xl text-center max-w-[70%] m-auto text-secondary text-opacity-80 leading-relaxed">Have Questions? We're Just a Message Away!<p>
               </div>
               <div class="flex flex-col gap-8">
-                <div class="flex gap-8">
+                <div class="flex gap-8 md:flex-row flex-col">
                   <div class="flex flex-col gap-2 flex-1">
                     <label class="text-sm text-secondary text-opacity-50">Full Name</label>
                     <input name="full_name" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your full name" />
@@ -249,7 +249,7 @@
                     <input name="email" type="email" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your email address" />
                   </div>
                 </div>
-                <div class="flex gap-8">
+                <div class="flex gap-8 md:flex-row flex-col">
                   <div class="flex flex-col gap-2 flex-1">
                     <label class="text-sm text-secondary text-opacity-50">Phone Number</label>
                     <input name="phone_number" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your phone number" />
@@ -259,7 +259,7 @@
                     <input name="company" type="text" class="border border-black border-opacity-20 px-4 py-3 text-lg rounded-md" placeholder="Enter your company" />
                   </div>
                 </div>
-                <div class="flex gap-8">
+                <div class="flex gap-8 md:flex-row flex-col">
                   <div class="flex flex-col gap-2 flex-1">
                     <label class="text-sm text-secondary text-opacity-50">Message</label>
                     <textarea class="w-full h-[200px] resize-none border border-black border-opacity-20 px-4 py-3 text-lg rounded-md"></textarea>                    

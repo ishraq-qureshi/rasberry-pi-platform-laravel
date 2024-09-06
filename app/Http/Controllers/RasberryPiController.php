@@ -12,6 +12,8 @@ use App\Models\RasberryPiNotification;
 use App\Models\RasberryPiModel;
 use App\Models\RasberryPiToken;
 use Illuminate\Support\Str;
+use App\Mail\NotificationMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class RasberryPiController extends Controller
@@ -23,7 +25,7 @@ class RasberryPiController extends Controller
         if($user->hasRole('subadmin')){
             $rasberryPis = $user->subUserRasberryPi;    
         }
-
+        
         return view('livewire.pages.manage-rasberry-pi.view', compact('rasberryPis'));
     }
 
@@ -147,6 +149,14 @@ class RasberryPiController extends Controller
             RasberryPiAnalytics::create($data);
         }
 
+        $user = Auth::user();
+        $rasberryPi = RasberryPi::where('id', $id)->first();
+
+        $details = [
+            'customer_name' => $user->name,
+            'device_name' => $rasberryPi->pi_name,
+        ];
+
         RasberryPiNotification::create(
             array(
                 "rasberry_pi_id" => $id,
@@ -155,6 +165,15 @@ class RasberryPiController extends Controller
                 "status" => $this->checkStatus(floatval($request->cpu_usage)),
             )
         );
+        
+
+        if($this->checkStatus(floatval($request->cpu_usage)) === "danger") {     
+            $details['data'] = array(
+                "key" => "CPU Usage",
+                "value" => $request->cpu_usage
+            );       
+            Mail::to($user->email)->send(new NotificationMail($details));
+        }
 
         RasberryPiNotification::create(
             array(
@@ -165,6 +184,14 @@ class RasberryPiController extends Controller
             )
         );
 
+        if($this->checkStatus(floatval($request->temperature)) === "danger") {     
+            $details['data'] = array(
+                "key" => "Temperature",
+                "value" => $request->temperature
+            );       
+            Mail::to($user->email)->send(new NotificationMail($details));
+        }
+
         RasberryPiNotification::create(
             array(
                 "rasberry_pi_id" => $id,
@@ -174,6 +201,14 @@ class RasberryPiController extends Controller
             )
         );
 
+        if($this->checkStatus(floatval($request->ram_usage)) === "danger") {     
+            $details['data'] = array(
+                "key" => "Ram Usage",
+                "value" => $request->ram_usage
+            );       
+            Mail::to($user->email)->send(new NotificationMail($details));
+        }
+
         RasberryPiNotification::create(
             array(
                 "rasberry_pi_id" => $id,
@@ -182,6 +217,16 @@ class RasberryPiController extends Controller
                 "status" => $this->checkStatus(floatval($request->storage_usage)),
             )
         );
+
+        if($this->checkStatus(floatval($request->storage_usage)) === "danger") {     
+            $details['data'] = array(
+                "key" => "Storage",
+                "value" => $request->storage_usage
+            );       
+            Mail::to($user->email)->send(new NotificationMail($details));
+        }
+
+        
 
         return true;
     }
