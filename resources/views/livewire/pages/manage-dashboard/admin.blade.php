@@ -69,16 +69,16 @@
                             
                             switch($notification['type']):
                               case "cpu":
-                                $message = "__('messages.the') $deviceName __('messages.cpu_reached') $value%";
+                                $message = __('messages.the') . " $deviceName " . __('messages.cpu_reached') . " $value%";
                                 break;
                               case "temperature":
-                                $message = "__('messages.the') $deviceName Temperature has reached $value C";
+                                $message = __('messages.the') . " $deviceName " . __('messages.temperature_reached') . " $value C";
                                 break;
                               case "storage":
-                                $message = "__('messages.the') $deviceName Storage usage has reached $value%";
+                                $message = __('messages.the') . " $deviceName " . __('messages.storage_reached') . " $value%";
                                 break;
                               case "ram":
-                                $message = "__('messages.the') $deviceName RAM usage has reached $value%";
+                                $message = __('messages.the') . " $deviceName " . __('messages.ram_reached') . " $value%";
                                 break;
                             endswitch;
                           @endphp

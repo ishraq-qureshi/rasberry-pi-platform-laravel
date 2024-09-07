@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Confirm Delete') }}
+          {{ __('messages.confirm_delete') }}
       </h2>
   </x-slot>
 
@@ -12,13 +12,13 @@
                   <form method="post" action="{{ route('rasberry-pi.destroy', ['id' => $rasberryPi->id]) }}">
                       @method('delete')
                       @csrf
-                      <p class="text-lg">{{ __("Are you sure want to delete?") }} <span class="font-bold">{{ $rasberryPi->pi_name }}</span></p>
+                      <p class="text-lg">{{ __("messages.confirm_delete_desc") }} <span class="font-bold">{{ $rasberryPi->pi_name }}</span></p>
                       <div class="mt-4 flex gap-3">
                         <a href="{{ route('rasberry-pi.view') }}" class='inline-flex items-center px-3 text-sm py-1 bg-red-600 border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
-                          Back
+                          {{ __("messages.back") }}
                         </a>
                         <button type="submit" class='inline-flex items-center px-3 text-sm py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
-                          Delete
+                          {{ __("messages.delete") }}
                         </button>
                       </div>
                   </form>

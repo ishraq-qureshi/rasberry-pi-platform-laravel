@@ -11,59 +11,59 @@
       <div class="max-w-7xl mx-auto flex flex-col gap-5 sm:px-6 lg:px-8">
           <div class="overflow-hidden flex gap-2">
             <div class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-              <p class="font-normal text-sm text-gray-700 dark:text-gray-400">CPU Usage</p>
-              <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $rasberryPi->analytics ? $rasberryPi->analytics->cpu_usage : "N/A" }}</h5>
+              <p class="font-normal text-sm text-gray-700 dark:text-gray-400">{{ __("messages.total_cpu_usage") }}</p>
+              <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $rasberryPi->analytics ? $rasberryPi->analytics->cpu_usage : __("messages.n_a") }}</h5>
             </div>
             <div class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-              <p class="font-normal text-sm text-gray-700 dark:text-gray-400">RAM Usage</p>
-              <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $rasberryPi->analytics ? $rasberryPi->analytics->ram_usage : "N/A" }}</h5>
+              <p class="font-normal text-sm text-gray-700 dark:text-gray-400">{{ __("messages.total_ram_usage") }}</p>
+              <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $rasberryPi->analytics ? $rasberryPi->analytics->ram_usage : __("messages.n_a") }}</h5>
             </div>
             <div class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-              <p class="font-normal text-sm text-gray-700 dark:text-gray-400">Temperature</p>
-              <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $rasberryPi->analytics ? $rasberryPi->analytics->temperature : "N/A" }}</h5>
+              <p class="font-normal text-sm text-gray-700 dark:text-gray-400">{{ __("messages.temperature") }}</p>
+              <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $rasberryPi->analytics ? $rasberryPi->analytics->temperature : __("messages.n_a") }}</h5>
             </div>
             <div class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-              <p class="font-normal text-sm text-gray-700 dark:text-gray-400">Storage Usage</p>
-              <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $rasberryPi->analytics ? $rasberryPi->analytics->storage_usage : "N/A" }}</h5>
+              <p class="font-normal text-sm text-gray-700 dark:text-gray-400">{{ __("messages.total_storage_usage") }}</p>
+              <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ $rasberryPi->analytics ? $rasberryPi->analytics->storage_usage : __("messages.n_a") }}</h5>
             </div>
           </div>
 
           <div class="flex gap-4 items-start">
             <div class="bg-white flex-1 overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6">
-                  <h3 class="font-bold text-2xl">Notifications</h3>
+                  <h3 class="font-bold text-2xl">{{ __("messages.notification") }}</h3>
                   <div class="flex flex-col">
                     @if(count($rasberryPi->notifications) > 0)
                       @foreach($rasberryPi->notifications as $notification)
                         <div class="flex gap-4 items-center border-b border-gray-200 p-4 py-6 last:border-0 last:pb-0">
                           @php
                             switch($notification->status):
-                              case "warning":
+                            case "warning":
                                 $iconClass = "bg-yellow-100";
-                                $label = "Warning";
+                                $label = __("messages.warning");
                                 break;
                               case "danger":
                                 $iconClass = "bg-red-100";
-                                $label = "Danger";
+                                $label = __("messages.danger");
                                 break;
                               case "ideal":
                                 $iconClass = "bg-gray-100";
-                                $label = "Idel";
+                                $label = __("messages.idel");
                                 break;
                             endswitch;
 
                             switch($notification->type):
                               case "cpu":
-                                $message = "Your device CPU usage has reached $notification->value%";
+                                $message = __('messages.the') . " $rasberryPi->pi_name " . __('messages.cpu_reached') . " $notification->value%";
                                 break;
                               case "temperature":
-                                $message = "Your device Temperature has reached $notification->value C";
+                                $message = __('messages.the') . " $rasberryPi->pi_name " . __('messages.temperature_reached') . " $notification->value C";
                                 break;
                               case "storage":
-                                $message = "Your device Storage usage has reached $notification->value%";
+                                $message = __('messages.the') . " $rasberryPi->pi_name " . __('messages.storage_reached') . " $notification->value%";
                                 break;
                               case "ram":
-                                $message = "Your device RAM usage has reached $notification->value%";
+                                $message = __('messages.the') . " $rasberryPi->pi_name " . __('messages.ram_reached') . " $notification->value%";
                                 break;
                             endswitch;
                           @endphp
@@ -80,7 +80,7 @@
                         </div>
                       @endforeach
                     @else
-                        <p>No notifications available</p>
+                        <p>{{ __("messages.no_notification") }}</p>
                     @endif
                   </div>
               </div>
@@ -90,24 +90,24 @@
               <div class="p-6 text-gray-900">
                 <ul class="flex flex-col gap-4">
                   <li class="flex gap-2 justify-between items-center">
-                    <span class="font-bold">Serial Number:</span>
-                    <span>{{ $rasberryPi->analytics ? $rasberryPi->analytics->serial_number : "N/A" }}</span>
+                    <span class="font-bold">{{ __("messages.serial_number") }}:</span>
+                    <span>{{ $rasberryPi->analytics ? $rasberryPi->analytics->serial_number : __("messages.n_a") }}</span>
                   </li>
                   <li class="flex gap-2 justify-between items-center">
-                    <span class="font-bold">Modal:</span>
-                    <span>{{ $rasberryPi->analytics ? $rasberryPi->analytics->model : "N/A" }}</span>
+                    <span class="font-bold">{{ __("messages.model") }}:</span>
+                    <span>{{ $rasberryPi->analytics ? $rasberryPi->analytics->model : __("messages.n_a") }}</span>
                   </li>
                   <li class="flex gap-2 justify-between items-center">
-                    <span class="font-bold">IP Address Lan:</span>
-                    <span>{{ $rasberryPi->analytics ? $rasberryPi->analytics->ip_address_lan	: "N/A" }}</span>
+                    <span class="font-bold">{{ __("messages.ip_lan_address") }}:</span>
+                    <span>{{ $rasberryPi->analytics ? $rasberryPi->analytics->ip_address_lan	: __("messages.n_a") }}</span>
                   </li>
                   <li class="flex gap-2 justify-between items-center">
-                    <span class="font-bold">IP Address WAN:</span>
-                    <span>{{ $rasberryPi->analytics ? $rasberryPi->analytics->ip_address_wlan : "N/A" }}</span>
+                    <span class="font-bold">{{ __("messages.ip_wan_address") }}:</span>
+                    <span>{{ $rasberryPi->analytics ? $rasberryPi->analytics->ip_address_wlan : __("messages.n_a") }}</span>
                   </li>
                   <li class="flex gap-2 justify-between items-center">
-                    <span class="font-bold">Last Updated:</span>
-                    <span>{{ $rasberryPi->analytics ? $carbon::parse($rasberryPi->analytics->updated_at)->diffForHumans() : "N/A" }}</span>
+                    <span class="font-bold">{{ __("messages.last_updated") }}:</span>
+                    <span>{{ $rasberryPi->analytics ? $carbon::parse($rasberryPi->analytics->updated_at)->diffForHumans() : __("messages.n_a") }}</span>
                   </li>
 
                 </ul>

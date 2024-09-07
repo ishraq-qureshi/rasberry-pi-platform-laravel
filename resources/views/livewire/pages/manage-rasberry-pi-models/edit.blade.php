@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Manage Rasberry Pi Model') }}
+          {{ __('messages.manage_rasberry_pi_model') }}
       </h2>
   </x-slot>
 
@@ -13,14 +13,14 @@
                 <form class="" method="post" action="{{ route('rasberry-pi-modal.save') }}" enctype="multipart/form-data">
                   @csrf
                   <div class="mb-4">
-                    <label for="model_name" class="block mb-2 text-sm font-medium text-gray-900">Model Name</label>
-                    <input type="text" name="model_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter model name" value="{{ isset($model) ? $model->model_name : "" }}" />
+                    <label for="model_name" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.model_name") }}</label>
+                    <input type="text" name="model_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.model_name_placeholder") }}" value="{{ isset($model) ? $model->model_name : "" }}" />
                     @error('model_name')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="small_size">Model Image</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="small_size">{{ __("messages.model_image") }}</label>
                     <input class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="small_size" name="model_image" type="file">
                     @error('model_image')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
@@ -36,10 +36,10 @@
                       <input type="hidden" name="id" value="{{ $model->id }}" />
                     @endisset
                     <a href="{{ route('rasberry-pi-modal.view') }}" class="py-2 px-6 bg-red-500 text-white rounded-md">
-                      Back
+                      {{ __("messages.back") }}
                     </a>
                     <button type="submit" class='class="py-2 px-6 bg-black text-white rounded-md'>
-                      Save
+                      {{ __("messages.save") }}
                     </button>
                   </div>
                 </form>

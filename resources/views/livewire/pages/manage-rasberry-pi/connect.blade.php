@@ -10,10 +10,10 @@
         <div>
           <ul class="text-sm font-medium text-center text-gray-500 rounded-lg shadow sm:flex">
             <li class="w-full focus-within:z-10">
-                <a href="#automateTab" class="tab-item inline-block w-full p-4 text-gray-900 bg-gray-100 border-r border-gray-200 rounded-s-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none" aria-current="page">Automate</a>
+                <a href="#automateTab" class="tab-item inline-block w-full p-4 text-gray-900 bg-gray-100 border-r border-gray-200 rounded-s-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none" aria-current="page">{{ __('messages.automate') }}</a>
             </li>
             <li class="w-full focus-within:z-10">
-                <a href="#manualTab" class="tab-item inline-block w-full p-4 bg-white border-r border-gray-200 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none">Manual</a>
+                <a href="#manualTab" class="tab-item inline-block w-full p-4 bg-white border-r border-gray-200 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none">{{ __("messages.manual") }}</a>
             </li>
           </ul>
         </div>
@@ -130,9 +130,9 @@ if __name__ == "__main__":
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
               <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Create a Shell Script</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Cron jobs typically run at intervals of 1 minute or more. To achieve a 5-second interval, you'll need to create a shell script that uses a loop to run the Python script every 5 seconds.</p>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Create a shell script, <span class="font-bold text-black underline">run_connection.sh</span>, and place it in the same directory as your Python.</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ __("messages.create_shell_script") }}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_shell_script_desc") }}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_shell_script") }}, <span class="font-bold text-black underline">run_connection.sh</span>, {{ __("messages.create_shell_script_2") }}</p>
                 <div class="px-3 py-2">
                   <pre class="language-python"><code class="text-sm">#!/bin/bash
 while true
@@ -141,14 +141,14 @@ do
   sleep 5
 done</code></pre>
                 </div>
-                <p class="font-normal text-gray-700 dark:text-gray-400">The while true loop ensures that the script runs indefinitely.</p>
-                <p class="font-normal text-gray-700 dark:text-gray-400">The sleep 5 command pauses execution for 5 seconds between each run.</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_shell_script_desc_2") }}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_shell_script_desc_3") }}</p>
               </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
               <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Make the Shell Script Executable</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Make the shell script executable by running the following command:</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ __("messages.shell_script_executable") }}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.shell_script_executable_desc") }}</p>
                 <div class="px-3 py-2">
                   <pre class="language-python"><code class="text-sm">chmod +x /home/pi/scripts/run_connection.sh</code></pre>
                 </div>
@@ -156,22 +156,22 @@ done</code></pre>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
               <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Create a Cron Job</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Now, create a cron job that starts the shell script at boot. Open the cron table with:</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ __("messages.create_cron_job") }}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_cron_job_desc") }}</p>
                 <div class="px-3 py-2">
                   <pre class="language-python"><code class="text-sm">crontab -e</code></pre>
                 </div>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Add the following line at the end of the file:</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_cron_job_desc_2") }}</p>
                 <div class="px-3 py-2">
                   <pre class="language-python"><code class="text-sm">@reboot /home/pi/scripts/run_connection.sh</code></pre>
                 </div>
-                <p class="font-normal text-gray-700 dark:text-gray-400">This tells cron to run the <span class="font-bold text-black underline">run_connection.sh</span> script at system boot, and the script will continue running, executing <span class="font-bold text-black underline">connection.py</span> every 5 seconds.</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_cron_job_desc_3") }} <span class="font-bold text-black underline">run_connection.sh</span> {{ __("messages.create_cron_job_desc_4") }} <span class="font-bold text-black underline">connection.py</span> {{ __("messages.create_cron_job_desc_5") }}</p>
               </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
               <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Reboot the Raspberry Pi</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Finally, reboot your Raspberry Pi to start the cron job:</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ __("messages.reboot_rasberry_pi") }}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.reboot_rasberry_pi_desc") }}</p>
                 <div class="px-3 py-2">
                   <pre class="language-python"><code class="text-sm">sudo reboot</code></pre>
                 </div>

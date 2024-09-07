@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Manage RasberryPi') }}
+          {{ __('messages.manage_rasberry_pi') }}
       </h2>
   </x-slot>
 
@@ -13,16 +13,16 @@
                 <form class="" method="post" action="{{ route('rasberry-pi.save') }}">
                   @csrf
                   <div class="mb-4">
-                    <label for="pi_name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
+                    <label for="pi_name" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.name") }}</label>
                     <input type="text" name="pi_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter rasberry pi name" value="{{ isset($rasberryPi) ? $rasberryPi->pi_name : "" }}" />
                     @error('pi_name')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label for="model" class="block mb-2 text-sm font-medium text-gray-900">Model</label>
+                    <label for="model" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.model") }}</label>
                     <select id="model" name="rasberry_pi_model_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2 py-4">
-                      <option>Select your model</option>
+                      <option>{{ __("messages.select_model") }}</option>
                       @foreach($models as $model)
                         @php
                           $selected = isset($rasberryPi) && $model->id === $rasberryPi->rasberry_pi_model_id ? "selected" : "";
@@ -39,10 +39,10 @@
                       <input type="hidden" name="id" value="{{ $rasberryPi->id }}" />
                     @endisset
                     <a href="{{ route('rasberry-pi.view') }}" class="py-2 px-6 bg-red-500 text-white rounded-md">
-                      Back
+                      {{ __("messages.back") }}
                     </a>
                     <button type="submit" class='class="py-2 px-6 bg-black text-white rounded-md'>
-                      Save
+                      {{ __("messages.save") }}
                     </button>
                   
                   </div>                  

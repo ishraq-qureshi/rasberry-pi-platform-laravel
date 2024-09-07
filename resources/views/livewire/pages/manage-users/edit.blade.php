@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Manage Users') }}
+          {{ __('messages.manage_users') }}
       </h2>
   </x-slot>
 
@@ -13,29 +13,29 @@
                 <form class="" method="post" action="{{ route('users.save') }}">
                   @csrf
                   <div class="mb-4">
-                    <label for="user_name" class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
-                    <input type="text" name="user_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter full name" value="{{ isset($user) ? $user->name : "" }}" />
+                    <label for="user_name" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.full_name") }}</label>
+                    <input type="text" name="user_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.full_name_placeholder") }}" value="{{ isset($user) ? $user->name : "" }}" />
                     @error('user_name')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">                    
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                    <input type="email" {{ isset($user) ? "disabled" : "" }} name="email" class="border {{ isset($user) ? "bg-gray-200 cursor-not-allowed" : "" }} border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter email" value="{{ isset($user) ? $user->email : "" }}"/>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.email") }}</label>
+                    <input type="email" {{ isset($user) ? "disabled" : "" }} name="email" class="border {{ isset($user) ? "bg-gray-200 cursor-not-allowed" : "" }} border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.email_placeholder") }}" value="{{ isset($user) ? $user->email : "" }}"/>
                     @error('email')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                    <input type="password" name="password" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter password"/>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.password") }}</label>
+                    <input type="password" name="password" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.password_placeholder") }}"/>
                     @error('password')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900">Confirm Password</label>
-                    <input type="password_confirmation" name="password_confirmation" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter confirm password" />
+                    <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.confirm_password") }}</label>
+                    <input type="password_confirmation" name="password_confirmation" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.confirm_password_placeholder") }}" />
                     @error('password_confirmation')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
@@ -45,10 +45,10 @@
                       <input type="hidden" name="id" value="{{ $user->id }}" />
                     @endisset
                     <a href="{{ route('users.view') }}" class="py-2 px-6 bg-red-500 text-white rounded-md">
-                      Back
+                      {{ __("messages.back") }}
                     </a>
                     <button type="submit" class='class="py-2 px-6 bg-black text-white rounded-md'>
-                      Save
+                      {{ __("messages.save") }}
                     </button>
                   
                   </div>                  

@@ -2,9 +2,9 @@
   <x-slot name="header">
       <div class="flex justify-between items-center">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Manage Rasberry Pi Models') }}
+          {{ __('messages.manage_rasberry_pi_model') }}
         </h2>
-        <a href="{{ route('rasberry-pi-modal.create') }}" class="py-2 px-6 bg-black text-white rounded-md">Add New Plan</a>        
+        <a href="{{ route('rasberry-pi-modal.create') }}" class="py-2 px-6 bg-black text-white rounded-md">{{ __("messages.add_new_model") }}</a>        
       </div>
   </x-slot>
 
@@ -12,7 +12,7 @@
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">        
           @if(session('success'))
             <div class="p-4 mb-4 text-sm text-white bg-green rounded-lg border border-green" role="alert">
-              <span class="font-medium">Success!</span> {{ session('success') }}
+              <span class="font-medium">{{ __("messages.success") }}!</span> {{ session('success') }}
             </div>
           @endif
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -22,13 +22,13 @@
                       <thead class="text-gray-400 uppercase">
                           <tr>
                               <th scope="col" class="px-6 py-4">
-                                {{ __('Model Name') }}
+                                {{ __('messages.model_name') }}
                               </th>
                               <th scope="col" class="px-6 py-4 text-center">
-                                {{ __('Model Image') }}
+                                {{ __('messages.model_image') }}
                               </th>
                               <th scope="col" class="px-6 py-4 text-center">
-                                {{ __('Actions') }}
+                                {{ __('messages.action') }}
                             </th>
                           </tr>
                       </thead>
@@ -44,15 +44,15 @@
                                 <img src="{{ url('storage/model_images/' . $model->model_image) }}" class="m-auto" alt="{{ $model->model_name }}" width="100" height="100" />
                               </td>
                               <td class="text-center justify-center px-6 py-4">
-                                <a href="{{ route('rasberry-pi-modal.edit', ['id' => $model->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                <a href="{{ route('rasberry-pi-modal.delete', ['id' => $model->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                <a href="{{ route('rasberry-pi-modal.edit', ['id' => $model->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __("messages.edit") }}</a>
+                                <a href="{{ route('rasberry-pi-modal.delete', ['id' => $model->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">{{ __("messages.remove") }}</a>
                               </td>
                             </tr>
                             @endforeach
                           @else
                             <tr>
                               <td colspan="5">
-                                <p class="text-center">No Record(s) available.</p>
+                                <p class="text-center">{{ __("messages.no_record") }}</p>
                               </td>
                             </tr>
                           @endif

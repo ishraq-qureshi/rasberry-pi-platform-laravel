@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Manage Subscription Plans') }}
+          {{ __('messages.manage_plan') }}
       </h2>
   </x-slot>
 
@@ -13,29 +13,29 @@
                 <form class="" method="post" action="{{ route('subscription-plans.save') }}">
                   @csrf
                   <div class="mb-4">
-                    <label for="plan_name" class="block mb-2 text-sm font-medium text-gray-900">Plan Name</label>
-                    <input type="text" name="plan_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter plan name" value="{{ isset($plan) ? $plan->plan_name : "" }}" />
+                    <label for="plan_name" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.plan_name") }}</label>
+                    <input type="text" name="plan_name" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.plan_name_placeholder") }}" value="{{ isset($plan) ? $plan->plan_name : "" }}" />
                     @error('plan_name')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                    <input type="number" name="price" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter plan price" value="{{ isset($plan) ? $plan->price : "" }}"/>
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.price") }}</label>
+                    <input type="number" name="price" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.price_placeholder") }}" value="{{ isset($plan) ? $plan->price : "" }}"/>
                     @error('price')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label for="allowed_rasberry" class="block mb-2 text-sm font-medium text-gray-900">Allowed Rasberry Pi</label>
-                    <input type="number" name="allowed_rasberry" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter plan allowed rasberry pi" value="{{ isset($plan) ? $plan->allowed_rasberry : "" }}"/>
+                    <label for="allowed_rasberry" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.allowed_devices") }}</label>
+                    <input type="number" name="allowed_rasberry" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.allowed_device_placeholder") }}" value="{{ isset($plan) ? $plan->allowed_rasberry : "" }}"/>
                     @error('allowed_rasberry')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4">
-                    <label for="allowed_users" class="block mb-2 text-sm font-medium text-gray-900">Allowed Sub Admins</label>
-                    <input type="number" name="allowed_users" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter plan allowed sub admins" value="{{ isset($plan) ? $plan->allowed_users : "" }}"/>
+                    <label for="allowed_users" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.allowed_user") }}</label>
+                    <input type="number" name="allowed_users" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.allowed_user_placeholder") }}" value="{{ isset($plan) ? $plan->allowed_users : "" }}"/>
                     @error('allowed_users')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
@@ -44,7 +44,7 @@
                     <div>
                       <label for="isDiscount" class="inline-flex items-center">
                         <input name="isDiscount" value="1" id="isDiscount" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ isset($plan) && $plan->isDiscount ? "checked" : "" }}>
-                        <span class="ms-2 text-sm text-gray-600">{{ __('Is Discount?') }}</span>
+                        <span class="ms-2 text-sm text-gray-600">{{ __('messages.is_discount') }}?</span>
                       </label>
                       @error('isDiscount')
                           <div class="text-red-600 text-xs">{{ $message }}</div>
@@ -53,7 +53,7 @@
                     <div>
                       <label for="is_trial" class="inline-flex items-center">
                         <input name="is_trial" value="1" id="is_trial" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ isset($plan) && $plan->is_trial ? "checked" : "" }}>
-                        <span class="ms-2 text-sm text-gray-600">{{ __('Trial Plan?') }} <small>(Trial plan will be active for 14 days only and only one can be selected as trial at a time)</small></span>
+                        <span class="ms-2 text-sm text-gray-600">{{ __('messages.trial_plan') }}? <small>({{ __("messages.trial_plan_desc") }})</small></span>
                       </label>
                       @error('is_trial')
                           <div class="text-red-600 text-xs">{{ $message }}</div>
@@ -61,14 +61,14 @@
                     </div>
                   </div>
                   <div class="mb-4 {{ isset($plan) && $plan->isDiscount ? "" : "hidden" }}" id="discountPrice">
-                    <label for="discount_price" class="block mb-2 text-sm font-medium text-gray-900">Discount Price</label>
-                    <input type="number" name="discount_price" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="Enter plan price" value="{{ isset($plan) ? $plan->discount_price : "" }}"/>
+                    <label for="discount_price" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.discount_price") }}</label>
+                    <input type="number" name="discount_price" class="border border-gray-400 text-sm rounded-md block w-full px-2 py-4" placeholder="{{ __("messages.discount_price_placeholder") }}" value="{{ isset($plan) ? $plan->discount_price : "" }}"/>
                     @error('discount_price')
                         <div class="text-red-600 text-xs">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="mb-4 ">
-                    <label for="features" class="block mb-2 text-sm font-medium text-gray-900">Features</label>
+                    <label for="features" class="block mb-2 text-sm font-medium text-gray-900">{{ __("messages.features") }}</label>
                     <div class="flex flex-col gap-3 featureWrapper">
                       @if(isset($plan) && $plan->features)
                         @foreach(unserialize( $plan->features ) as $feature)
@@ -112,10 +112,10 @@
                       <input type="hidden" name="id" value="{{ $plan->id }}" />
                     @endisset
                     <a href="{{ route('subscription-plans.view') }}" class="py-2 px-6 bg-red-500 text-white rounded-md">
-                      Back
+                      {{ __("messages.back") }}
                     </a>
                     <button type="submit" class='class="py-2 px-6 bg-black text-white rounded-md'>
-                      Save
+                      {{ __("messages.save") }}
                     </button>
                   
                   </div>                  

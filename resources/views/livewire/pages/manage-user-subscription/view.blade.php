@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Select Your Plan') }}
+          {{ __('messages.select_your_plan') }}
       </h2>
   </x-slot>
 
@@ -19,17 +19,17 @@
                       @endphp
                       <div id="subscription_{{ $plan->id }}" data-id="{{ $plan->id }}" data-price="{{ $plan->isDiscount ? $plan->discount_price : $plan->price }}" class="subscription_box max-w-[calc(100%/3-20px)] flex flex-col p-6 mx-auto w-full text-center text-gray-900 bg-white rounded-md border border-gray-200">
                         <h3 class="mb-4 text-2xl font-semibold">{{ $plan->plan_name }}</h3>
-                        <p class="font-light text-gray-500">Allowed Rasberry Pi: {{ $plan->allowed_rasberry }} units</p>
+                        <p class="font-light text-gray-500">{{ __("messages.allowed_devices") }}: {{ $plan->allowed_rasberry }} {{ __("messages.units") }}</p>
                         <div class="flex flex-col gap-2 my-4">
                           @if($plan->isDiscount && !$plan->is_trial)
                             <p class="text-gray-400 line-through">€{{ number_format($plan->price, 2) }}</p>
                           @endif
                           <div class="flex justify-center items-baseline">
                             @if($plan->is_trial)
-                              <span class="mr-2 text-5xl font-extrabold">Free</span>
+                              <span class="mr-2 text-5xl font-extrabold">{{ __("messages.free") }}</span>
                             @else
                               <span class="mr-2 text-5xl font-extrabold">€{{ number_format($plan->isDiscount ? $plan->discount_price : $plan->price, 2) }}</span>
-                              <span class="text-gray-500 dark:text-gray-400">/month</span>
+                              <span class="text-gray-500 dark:text-gray-400">/{{ __("messages.month") }}</span>
                             @endif
                           </div>
                         </div>
@@ -41,12 +41,12 @@
                           </li>
                           @endforeach
                         </ul>
-                        <button type="button" class="selectSubscriptionPlan text-white {{ $activePlanId === $plan->id ? "bg-green cursor-not-allowed" : "bg-blue-600" }} hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{ $activePlanId === $plan->id ? "Active" : "Select" }}</button>
+                        <button type="button" class="selectSubscriptionPlan text-white {{ $activePlanId === $plan->id ? "bg-green cursor-not-allowed" : "bg-blue-600" }} hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{ $activePlanId === $plan->id ? __("messages.active") : __("messages.select") }}</button>
                       </div>
                     @endforeach                    
                   </div>
                   <div class="flex justify-center mt-8">
-                    <button id="buyPlan" class="text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-lg px-5 py-2.5 text-center w-[300px]">Get Started</button>
+                    <button id="buyPlan" class="text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-lg px-5 py-2.5 text-center w-[300px]">{{ __("messages.get_started") }}</button>
                   </div>
               </div>
           </div>
@@ -59,6 +59,9 @@
       let id = null;
       let price = null;
 
+      const selectText = "{{ __('messages.select') }}";
+      const selectedText = "{{ __('messages.selected') }}";
+
       jQuery('.selectSubscriptionPlan').click(function(){
         id = jQuery(this).parents('.subscription_box').attr("data-id");
         price = jQuery(this).parents('.subscription_box').attr("data-price");
@@ -66,13 +69,13 @@
         if(jQuery(this).hasClass('active')) {
           jQuery('.selectSubscriptionPlan').removeClass('active');
           jQuery(this).parents('.subscription_box').removeClass('border-blue-600')
-          jQuery(this).text('Select')
+          jQuery(this).text(selectText)
         } else {
           jQuery('.selectSubscriptionPlan').removeClass('active');
           jQuery('.subscription_box').removeClass('border-blue-600');
           jQuery(this).parents('.subscription_box').addClass('border-blue-600')
           jQuery(this).addClass('active');
-          jQuery(this).text('Selected')
+          jQuery(this).text(selectedText)
         }
       });
 

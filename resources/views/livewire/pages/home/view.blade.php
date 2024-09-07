@@ -178,7 +178,7 @@
                 @foreach ($subscriptionPlans as $plan)
                 <div class="flex w-full lg:flex-1 lg:max-w-[410px] min-w-[calc(100%/3-20px)] flex-col relative bg-white md:gap-6 gap-4 p-8 rounded-md shadow-md" data-id="{{ $plan->id }}" data-price="{{ $plan->isDiscount ? $plan->discount_price : $plan->price }}">
                   @if($plan->is_trial)
-                    <span class="bg-secondary absolute text-white px-4 py-1 text-sm rounded-full font-medium top-[-14px] left-0 right-0 m-auto max-w-[100px] text-center">Trial Plan</span>                  
+                    <span class="bg-secondary absolute text-white px-4 py-1 text-sm rounded-full font-medium top-[-14px] left-0 right-0 m-auto max-w-[100px] text-center">{{ __("messages.trial_plan") }}</span>                  
                   @endif
                   <h3 class="md:text-3xl text-2xl  text-center text-secondary">{{ $plan->plan_name }}</h3>
                   <div class="flex flex-col items-center">
@@ -186,7 +186,7 @@
                       <h3 class="text-2xl text-gray-400 line-through">€{{ number_format($plan->price, 2) }} </span>
                     @endif
                     @if($plan->is_trial)
-                      <h3 class="md:text-6xl text-4xl font-bold  text-secondary font-['Nerko One']">{{ __("messages.free") }} <span class="text-xl text-opacity-40 font-normal">/14 days</span></h3>
+                      <h3 class="md:text-6xl text-4xl font-bold  text-secondary font-['Nerko One']">{{ __("messages.free") }} <span class="text-xl text-opacity-40 font-normal">/{{ __("messages.14_days") }}</span></h3>
                     @else
                       <h3 class="md:text-6xl text-4xl font-bold  text-secondary font-['Nerko One']"><sup>€</sup>{{ number_format($plan->isDiscount ? $plan->discount_price : $plan->price, 2) }}<span class="text-xl text-opacity-40 font-normal">/month</span></h3>
                     @endif                        

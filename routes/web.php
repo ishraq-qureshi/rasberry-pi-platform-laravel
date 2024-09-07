@@ -43,6 +43,14 @@ Route::post('/post-rasberry-data/{id}', [RasberryPiController::class, 'postData'
 
 Route::get('/setup-rasberry-pi/{token}', [RasberryPiController::class, 'setup'])->name('setup-rasberry-pi');
 
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'fr'])) { // Add more languages as needed
+        Session::put('locale', $locale);
+        App::setLocale($locale);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
 Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->group(function () {
 

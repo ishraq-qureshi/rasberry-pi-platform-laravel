@@ -33,30 +33,30 @@ new class extends Component
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex flex-1">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                        {{ __('messages.dashboard') }}
                     </x-nav-link>
                     @role('superadmin')
                         <x-nav-link :href="route('subscription-plans.view')" :active="request()->routeIs('subscription-plans.view')" wire:navigate>
-                            {{ __('Manage Subscription Plans') }}
+                            {{ __('messages.manage_subscription_plan') }}
                         </x-nav-link>
                         <x-nav-link :href="route('users.view')" :active="request()->routeIs('users.view')" wire:navigate>
-                            {{ __('Manage Users') }}
+                            {{ __('messages.manage_users') }}
                         </x-nav-link>
                         <x-nav-link :href="route('rasberry-pi-modal.view')" :active="request()->routeIs('rasberry-pi-modal.view')" wire:navigate>
-                            {{ __('Manage Models') }}
+                            {{ __('messages.models') }}
                         </x-nav-link>
                     @endrole
                     @role('admin')
                         <x-nav-link :href="route('rasberry-pi.view')" :active="request()->routeIs('rasberry-pi.view')" wire:navigate>
-                            {{ __('Manage Rasberry Pi') }}
+                            {{ __('messages.manage_rasberry_pi') }}
                         </x-nav-link>
                         <x-nav-link :href="route('users.view')" :active="request()->routeIs('users.view')" wire:navigate>
-                            {{ __('Manage Users') }}
+                            {{ __('messages.manage_users') }}
                         </x-nav-link>
                     @endrole
                     @role('subadmin')
                     <x-nav-link :href="route('rasberry-pi.view')" :active="request()->routeIs('rasberry-pi.view')" wire:navigate>
-                        {{ __('Manage Rasberry Pi') }}
+                        {{ __('messages.manage_rasberry_pi') }}
                     </x-nav-link>
                     @endrole
                 </div>
@@ -68,9 +68,9 @@ new class extends Component
                             $remainingDays = Carbon::now()->diffInDays($subscriptionEndDate, false);
                         @endphp
                         @if($remainingDays > 0)
-                            <p class="text-red-600 font-bold text-sm">Trial Ends in {{ $remainingDays }} day(s)</p>
+                            <p class="text-red-600 font-bold text-sm">{{ __("messages.trial_ends_in") }} {{ $remainingDays }} {{ __("messages.days") }}</p>
                         @else
-                            <p class="text-red-600 font-bold text-sm">Your Trial Plan Has Been Ended</p>
+                            <p class="text-red-600 font-bold text-sm">{{ __("messages.trial_ended") }}</p>
                         @endif
                     @endif
                 @endif
@@ -92,13 +92,18 @@ new class extends Component
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile')" wire:navigate>
-                            {{ __('Profile') }}
+                            {{ __('messages.profile') }}
                         </x-dropdown-link>
+
+                        <x-dropdown-link :href="app()->getLocale() === 'en' ? route('lang.switch', ['locale' => 'fr']) : route('lang.switch', ['locale' => 'en'])" wire:navigate>
+                            {{ app()->getLocale() === 'en' ? __('messages.french') : __('messages.english') }}
+                        </x-dropdown-link>
+                        
 
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
-                                {{ __('Log Out') }}
+                                {{ __('messages.logout') }}
                             </x-dropdown-link>
                         </button>
                     </x-slot>
@@ -121,7 +126,7 @@ new class extends Component
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
+                {{ __('messages.dashboard') }}
             </x-responsive-nav-link>
         </div>
 
@@ -134,13 +139,13 @@ new class extends Component
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile')" wire:navigate>
-                    {{ __('Profile') }}
+                    {{ __('messages.profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <button wire:click="logout" class="w-full text-start">
                     <x-responsive-nav-link>
-                        {{ __('Log Out') }}
+                        {{ __('messages.logout') }}
                     </x-responsive-nav-link>
                 </button>
             </div>

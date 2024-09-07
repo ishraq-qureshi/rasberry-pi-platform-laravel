@@ -2,10 +2,10 @@
   <x-slot name="header">
       <div class="flex justify-between items-center">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Manage Users') }}
+          {{ __('messages.manage_users') }}
         </h2>
         @role("admin")
-          <a href="{{ route('users.create') }}" class="py-2 px-6 bg-black text-white rounded-md">Add New Admin</a>
+          <a href="{{ route('users.create') }}" class="py-2 px-6 bg-black text-white rounded-md">{{ __("messages.add_new_user") }}</a>
         @endrole
       </div>
   </x-slot>
@@ -14,12 +14,12 @@
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">        
           @if(session('success'))
             <div class="p-4 mb-4 text-sm text-white bg-green rounded-lg border border-green" role="alert">
-              <span class="font-medium">Success!</span> {{ session('success') }}
+              <span class="font-medium">{{ __("messages.success") }}!</span> {{ session('success') }}
             </div>
           @endif
           @if(session('error'))
             <div class="p-4 mb-4 text-sm text-white bg-red-600 rounded-lg border border-red-600" role="alert">
-              <span class="font-medium">Error!</span> {{ session('error') }}
+              <span class="font-medium">{{ __("messages.error") }}!</span> {{ session('error') }}
             </div>
           @endif
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,19 +29,19 @@
                       <thead class="text-gray-400 uppercase">
                           <tr>
                               <th scope="col" class="px-6 py-4">
-                                {{ __('Full Name') }}
+                                {{ __('messages.full_name') }}
                               </th>
                               <th scope="col" class="px-6 py-4 text-center">
-                                {{ __('Email') }}
+                                {{ __('messages.email') }}
                               </th>
                               <th scope="col" class="px-6 py-4 text-center">
-                                {{ __('Subscription Plan') }}
+                                {{ __('messages.subscription_plan') }}
                               </th>
                               <th scope="col" class="px-6 py-4 text-center">
-                                {{ __('Status') }}
+                                {{ __('messages.status') }}
                               </th>
                               <th scope="col" class="px-6 py-4 text-center">
-                                {{ __('Actions') }}
+                                {{ __('messages.action') }}
                             </th>
                           </tr>
                       </thead>
@@ -57,14 +57,14 @@
                                   {{ $user->email }}
                                 </td>                                
                                 <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
-                                  {{ $user->subscriptions && count($user->subscriptions) > 0 ? $user->subscriptions[0]->plan->plan_name : "No Plan Selected" }}
+                                  {{ $user->subscriptions && count($user->subscriptions) > 0 ? $user->subscriptions[0]->plan->plan_name : __("messages.no_plan_selected") }}
                                 </td>
                                 <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center capitalize">
                                   {{ $user->subscriptions && count($user->subscriptions) > 0 ? $user->subscriptions[0]->status : "Pending" }}
                                 </td>
                                 <td class="flex items-center justify-center px-6 py-4">
-                                  <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                  <a href="{{ route('users.delete', ['id' => $user->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                  <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __("messages.edit") }}</a>
+                                  <a href="{{ route('users.delete', ['id' => $user->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">{{ __("messages.remove") }}</a>
                               </td>
                                 @endrole
                                 @role('admin')
@@ -75,14 +75,14 @@
                                     {{ $user->user->email }}
                                   </td>       
                                   <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
-                                    {{ $user->parentUser->subscriptions && count($user->parentUser->subscriptions) > 0 ? $user->parentUser->subscriptions[0]->plan->plan_name : "No Plan Selected" }}
+                                    {{ $user->parentUser->subscriptions && count($user->parentUser->subscriptions) > 0 ? $user->parentUser->subscriptions[0]->plan->plan_name : __("messages.no_plan_selected") }}
                                   </td>
                                   <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center capitalize">
                                     {{ $user->parentUser->subscriptions && count($user->parentUser->subscriptions) > 0 ? $user->parentUser->subscriptions[0]->status : "Pending" }}
                                   </td>
                                   <td class="flex items-center justify-center px-6 py-4">
-                                    <a href="{{ route('users.edit', ['id' => $user->user->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    <a href="{{ route('users.delete', ['id' => $user->user->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                    <a href="{{ route('users.edit', ['id' => $user->user->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __("messages.edit") }}</a>
+                                    <a href="{{ route('users.delete', ['id' => $user->user->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">{{ __("messages.remove") }}</a>
                                   </td>
                                 @endrole
                                 
@@ -91,7 +91,7 @@
                           @else
                             <tr>
                               <td colspan="5">
-                                <p class="text-center">No Record(s) available.</p>
+                                <p class="text-center">{{ __("messages.no_record") }}</p>
                               </td>
                             </tr>
                           @endif
