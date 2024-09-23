@@ -201,6 +201,7 @@ return [
   "14_days" => "14 days",
   "english" => "English",
   "french" => "French",
-
+  "surname_placeholder" => "Enter your surname",
+  
 
 ];

@@ -15,7 +15,7 @@ class RasberryPi extends Model
 
     public function subscription()
     {
-        return $this->belongsTo(UserSubscription::class);
+        return $this->hasOne(UserSubscription::class, 'id');
     }
 
     public function analytics()

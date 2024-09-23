@@ -22,7 +22,9 @@ class ApplicationSetup extends Seeder
         $user = User::create([
             'name' => 'Super Admin',
             'email' => 'superadmin@yopmail.com',
-            'password' => bcrypt("Adobe110#")
+            'password' => bcrypt("Adobe110#"),
+            'surname' => "Mr",
+            'telephone' => '123456789'
         ]);
 
         // Create an initial user and assign the superadmin role        

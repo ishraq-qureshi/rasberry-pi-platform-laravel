@@ -149,8 +149,8 @@ class RasberryPiController extends Controller
             RasberryPiAnalytics::create($data);
         }
 
-        $user = Auth::user();
         $rasberryPi = RasberryPi::where('id', $id)->first();
+        $user = $rasberryPi->subscription->user;
 
         $details = [
             'customer_name' => $user->name,

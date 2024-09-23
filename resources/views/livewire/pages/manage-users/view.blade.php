@@ -4,7 +4,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
           {{ __('messages.manage_users') }}
         </h2>
-        @role("admin")
+        @hasanyrole("admin|superadmin")
           <a href="{{ route('users.create') }}" class="py-2 px-6 bg-black text-white rounded-md">{{ __("messages.add_new_user") }}</a>
         @endrole
       </div>
