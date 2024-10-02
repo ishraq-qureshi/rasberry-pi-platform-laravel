@@ -62,9 +62,12 @@
                                 <td scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center capitalize">
                                   {{ $user->subscriptions && count($user->subscriptions) > 0 ? $user->subscriptions[0]->status : "Pending" }}
                                 </td>
-                                <td class="flex items-center justify-center px-6 py-4">
+                                <td class="flex items-center justify-center px-6 py-4 gap-2">
                                   <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __("messages.edit") }}</a>
                                   <a href="{{ route('users.delete', ['id' => $user->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">{{ __("messages.remove") }}</a>
+                                  @if((count($user->subscriptions) > 0 && count($user->subscriptions[0]->payments)) && $user->subscriptions[0]->payments[count($user->subscriptions[0]->payments) - 1]->invoice_url)
+                                    <a target="_blank" class="font-medium text-green dark:text-green-500 hover:underline" href="{!! $user->subscriptions[0]->payments[count($user->subscriptions[0]->payments) - 1]->invoice_url !!}">{{ __("messages.download_invoice") }}</a>
+                                  @endif
                               </td>
                                 @endrole
                                 @role('admin')

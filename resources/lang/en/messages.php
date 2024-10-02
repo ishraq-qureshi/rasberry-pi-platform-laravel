@@ -202,6 +202,7 @@ return [
   "english" => "English",
   "french" => "French",
   "surname_placeholder" => "Enter your surname",
-  
+  "models" => "Manage Models",
+  "download_invoice" => "Download Invoice"
 
 ];

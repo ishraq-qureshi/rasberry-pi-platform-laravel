@@ -38,7 +38,8 @@ class StripeController extends Controller
             return response()->json(['error' => 'Invalid signature'], 400);
         }
 
-        
+        Stripe::setApiKey(config('services.stripe.secret'));
+
         // Handle the event types
         switch ($event['type']) {
             case 'checkout.session.completed':
@@ -48,16 +49,37 @@ class StripeController extends Controller
                 $user = User::where('email', $event['data']['object']['customer_details']['email'])->first();
                 $subscription = UserSubscription::where(['user_id' => $user->id, 'status' => 'pending'])->first();
 
+                if (isset($session['invoice'])) {
+                    // Retrieve the invoice object from Stripe
+                    
+                    $invoice = \Stripe\Invoice::retrieve($session['invoice']);
+    
+                    // Extract the invoice URL (hosted or PDF)
+                    $invoiceUrl = $invoice->invoice_pdf ?? $invoice->hosted_invoice_url;
+    
+                    // Log the invoice URL
+                    Log::info('Invoice URL: ' . $invoiceUrl);
+    
+                    // Send the invoice URL to the user or return it in the response as needed
+                    // You could store this in your DB or pass it in the success route
+                    // Example: $user->notify(new InvoiceUrlNotification($invoiceUrl));
+                }
+
                 Payment::create(array(
                     'user_id' => $user->id,
                     'user_subscription_id' => $subscription->id,
                     'status' => "succeeded",
                     'price' => $subscription->price,
                     'stripe_response' => json_encode($session),
+                    'invoice_url' => $invoiceUrl ?? null,
                 ));
                 
                 $subscription->status = 'active';
                 $subscription->save();
+
+                Log::info("Event Data:" . json_encode($event));
+
+                
 
 
                 Log::info('Checkout session completed: ' . $session['id']);
@@ -68,6 +90,7 @@ class StripeController extends Controller
                 // Handle successful payment for a subscription invoice
                 $invoice = $event['data']['object'];
                 Log::info('Invoice payment succeeded: ' . $invoice['id']);
+
                 // Update the subscription status in your database here
                 break;
 
