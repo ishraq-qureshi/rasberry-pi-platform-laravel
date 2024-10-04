@@ -4,7 +4,9 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
           {{ __('messages.manage_my_tickets') }}
         </h2>
+        @role("admin")
         <a href="{{ route('user-tickets.create') }}" class="py-2 px-6 bg-black text-white rounded-md">{{ __("messages.add_support_ticket") }}</a>        
+        @endrole
       </div>
   </x-slot>
 

@@ -45,11 +45,11 @@
                     @isset($supportTicket)
                       <input type="hidden" name="id" value="{{ $supportTicket->id }}" />
                     @endisset
-                    <a href="{{ route('rasberry-pi.view') }}" class="py-2 px-6 bg-red-500 text-white rounded-md">
+                    <a href="{{ route('user-tickets.view') }}" class="py-2 px-6 bg-red-500 text-white rounded-md">
                       {{ __("messages.back") }}
                     </a>
                     <button type="submit" class='class="py-2 px-6 bg-black text-white rounded-md'>
-                      {{ __("messages.save") }}
+                      {{ __("messages.comment") }}
                     </button>
                   
                   </div>                  

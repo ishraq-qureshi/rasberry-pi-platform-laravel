@@ -216,4 +216,5 @@ return [
   "add_support_ticket" => "Add New Ticket",
   "title" => "Title",
   "manage_support_tickets" => "Manage Support Tickets",
+  "comment" => "Comment"
 ];
