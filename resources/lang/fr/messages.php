@@ -201,6 +201,21 @@ return [
   "14_days" => "14 jours",
   "english" => "Anglais",
   "french" => "Français",
+  "surname_placeholder" => "Entrez votre nom de famille",
+  "models" => "Gérer les modèles",
+  "download_invoice" => "Télécharger la facture",
+  "my_dashboard" => "Mon tableau de bord",
+  "my_invoices" => "Mon historique de paiement",
+  "my_invoices_desc" => "Téléchargez et vérifiez les factures par rapport aux paiements",
+  "invoice" => "Factures",
+  "date" => "Date",
+  "manage_subscription" => "Gérer mes abonnements",
+  "cancel_subscription" => "Annuler mon abonnement",
+  "manage_my_tickets" => "Gérer mes billets",
+  "add_support_ticket" => "Ajouter un nouveau billet",
+  "title" => "Titre",
+  "manage_support_tickets" => "Gérer les tickets d'assistance",
+  "comment" => "Commentaire"
 
 
 ];
