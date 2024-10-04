@@ -32,8 +32,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
               <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ __("messages.create_python_file") }}</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_python_file_desc_1") }} <span class="font-bold text-black underline">(connection.py)</span> is in the desired location. For example, let's assume it's located in <span class="font-bold text-black underline">/home/pi/scripts/connection.py</span>.</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_python_file_desc_1") }}</p>
                 <div class="px-3 py-2">
+                  <pre class="language-python"><code class="text-sm">sudo nano /connection.py</code></pre>
+                  <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_python_file_desc_2") }}</p>
                   <pre class="language-python"><code class="text-sm">import requests
 import json
 import psutil
@@ -134,10 +136,11 @@ if __name__ == "__main__":
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_shell_script_desc") }}</p>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_shell_script") }}, <span class="font-bold text-black underline">run_connection.sh</span>, {{ __("messages.create_shell_script_2") }}</p>
                 <div class="px-3 py-2">
+                  <pre class="language-python"><code class="text-sm">sudo nano /run_connection.sh</code></pre>
                   <pre class="language-python"><code class="text-sm">#!/bin/bash
 while true
 do
-  python3 /home/pi/scripts/connection.py
+  python3 /connection.py
   sleep 5
 done</code></pre>
                 </div>
@@ -150,7 +153,7 @@ done</code></pre>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ __("messages.shell_script_executable") }}</h5>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.shell_script_executable_desc") }}</p>
                 <div class="px-3 py-2">
-                  <pre class="language-python"><code class="text-sm">chmod +x /home/pi/scripts/run_connection.sh</code></pre>
+                  <pre class="language-python"><code class="text-sm">chmod +x /run_connection.sh</code></pre>
                 </div>
               </div>
             </div>
@@ -163,7 +166,7 @@ done</code></pre>
                 </div>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_cron_job_desc_2") }}</p>
                 <div class="px-3 py-2">
-                  <pre class="language-python"><code class="text-sm">@reboot /home/pi/scripts/run_connection.sh</code></pre>
+                  <pre class="language-python"><code class="text-sm">@reboot /run_connection.sh</code></pre>
                 </div>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{ __("messages.create_cron_job_desc_3") }} <span class="font-bold text-black underline">run_connection.sh</span> {{ __("messages.create_cron_job_desc_4") }} <span class="font-bold text-black underline">connection.py</span> {{ __("messages.create_cron_job_desc_5") }}</p>
               </div>

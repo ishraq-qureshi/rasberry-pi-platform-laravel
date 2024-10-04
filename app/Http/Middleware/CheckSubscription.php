@@ -27,7 +27,7 @@ class CheckSubscription
                 $subscription = $user->subscriptions()
                                     ->whereHas('payments', function($query) {
                                         $query->where('status', 'succeeded');
-                                    })
+                                    })->where('status', 'active')
                                     ->first();
     
                 $tial_user = $user->trialSubscription();
@@ -41,7 +41,7 @@ class CheckSubscription
                 $subscription = $user->subUser->parentUser->subscriptions()
                                     ->whereHas('payments', function($query) {
                                         $query->where('status', 'succeeded');
-                                    })
+                                    })->where('status', 'active')
                                     ->first();
     
                 $tial_user = $user->subUser->parentUser->trialSubscription();

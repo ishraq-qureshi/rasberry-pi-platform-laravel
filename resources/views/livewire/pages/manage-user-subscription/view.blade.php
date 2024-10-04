@@ -7,13 +7,18 @@
 
   <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          @if(isset(auth()->user()->subscriptions) && count(auth()->user()->subscriptions) > 0 && !auth()->user()->subscriptions[0]->is_trial && auth()->user()->subscriptions[0]->status === 'active')          
+            <div class="flex justify-end mb-4">
+              <a href="{{ route('user-subscription.cancel_sub') }}" class="hover:bg-red-400 bg-red-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{ __('messages.cancel_subscription') }}</a>
+            </div>
+          @endif
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-              <div class="p-6 text-gray-900">
+              <div class="p-6 text-gray-900">                  
                   <div class="flex gap-4 flex-wrap">
                     @foreach ($subscriptionPlans as $plan)
                       @php
                         $activePlanId = 0;
-                        if(isset(auth()->user()->subscriptions) && count(auth()->user()->subscriptions) > 0):
+                        if(isset(auth()->user()->subscriptions) && count(auth()->user()->subscriptions) > 0 && auth()->user()->subscriptions[0]->status === "active"):
                           $activePlanId = auth()->user()->subscriptions[0]->plan->id;
                         endif
                       @endphp

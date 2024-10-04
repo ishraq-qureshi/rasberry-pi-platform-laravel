@@ -86,4 +86,9 @@ class User extends Authenticatable
         return $this->hasMany(UserRasberryPi::class, 'user_id');
     }
 
+    public function supportTickets()
+    {
+        return $this->hasMany(UserSupportTicket::class)->whereNull('parent_id');
+    }
+
 }

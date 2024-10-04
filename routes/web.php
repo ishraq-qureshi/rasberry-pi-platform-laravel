@@ -9,6 +9,7 @@ use App\Http\Controllers\RasberryPiController;
 use App\Http\Controllers\RasberryPiModelController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserSupportTicketsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +107,22 @@ Route::middleware('auth')->group(function () {
                 ->name('user-subscription.cancel');
             Route::get('/checkout/{plan_id?}', [UserSubscriptionController::class, 'checkout'])
                 ->name('user-subscription.checkout');
+            Route::get('/cancel', [UserSubscriptionController::class, 'cancel_sub'])
+                ->name('user-subscription.cancel_sub');
+        });
+
+        Route::prefix('support-tickets')->group(function () {
+            Route::get('', [UserSupportTicketsController::class, "view"])
+                ->name('user-tickets.view');
+            Route::get('/create', [UserSupportTicketsController::class, "create"])
+                ->name('user-tickets.create');
+            Route::get('/details/{id}', [UserSupportTicketsController::class, "details"])
+                ->name('user-tickets.details');
+            Route::post('/save', [UserSupportTicketsController::class, "save"])
+                ->name('user-tickets.save');
+            Route::post('/reply/{id}', [UserSupportTicketsController::class, "reply"])
+                ->name('user-tickets.reply');
+            
         });
 
         // Manage Rasberry Pi Modals

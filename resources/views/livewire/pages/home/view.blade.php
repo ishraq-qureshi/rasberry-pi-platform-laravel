@@ -29,21 +29,27 @@
               <nav class="hidden lg:block">
                 <ul class="flex gap-8 items-center">
                   <li>
-                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">{{ __("messages.how_to_connect") }}</a>
+                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="#how-to-connect">{{ __("messages.how_to_connect") }}</a>
                   </li>
                   <li>
-                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">{{ __("messages.features") }}</a>
+                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="#features">{{ __("messages.features") }}</a>
                   </li>
                   <li>
-                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">{{ __("messages.pricing") }}</a>
+                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="#pricing">{{ __("messages.pricing") }}</a>
                   </li>
                   <li>
-                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="">{{ __("messages.contact") }}</a>
+                    <a class="text-gray-800 hover:text-gray-400 font-medium" href="#contact">{{ __("messages.contact") }}</a>
                   </li>
+                  @if(auth()->check())
+                  <li class="flex gap-2">
+                    <a class="bg-secondary hover:bg-gray-700 text-white block px-6 py-2 rounded-full font-medium" href="{{ route("dashboard") }}">{{ __("messages.my_dashboard") }}</a>                    
+                  </li>
+                  @else
                   <li class="flex gap-2">
                     <a class="bg-secondary hover:bg-gray-700 text-white block px-6 py-2 rounded-full font-medium" href="{{ route("register") }}">{{ __("messages.register") }}</a>
                     <a class="bg-primary hover:bg-primaryDark text-white block px-6 py-2 rounded-full font-medium" href="{{ route("login") }}">{{ __("messages.login") }}</a>
                   </li>
+                  @endif
                   <li>
                     
                   </li>
@@ -67,7 +73,7 @@
         {{-- HERO SECTION --}}
 
         {{-- HOW TO CONNECT --}}
-        <section class="px-4 py-16 bg-primary">
+        <section id="how-to-connect" class="px-4 py-16 bg-primary">
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col md:gap-20 gap-10">
               <div class="flex flex-col gap-2">
@@ -108,7 +114,7 @@
         {{-- HOW TO CONNECT --}}
 
         {{-- FEATURES --}}
-        <section class="px-4 md:py-20 py-10">
+        <section id="features" class="px-4 md:py-20 py-10">
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-16">
               <div class="flex flex-1 flex-col gap-6">
@@ -167,7 +173,7 @@
         {{-- FEATURES --}}
 
         {{-- PRICING --}}
-        <section class="px-4 py-16 bg-primary">
+        <section class="px-4 py-16 bg-primary" id="pricing">
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-20">
               <div class="flex flex-1 flex-col gap-2">
@@ -231,7 +237,7 @@
         {{-- PRICING --}}
 
         {{-- CONTACT --}}
-        <section class="px-4 py-16">
+        <section class="px-4 py-16" id="contact">
           <div class="max-w-[1280px] m-auto">
             <div class="flex flex-col gap-16">
               <div class="flex flex-1 flex-col gap-6">
@@ -282,4 +288,18 @@
         </footer>
         {{-- FOOTER --}}
     </body>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+      jQuery(function(){
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+      })
+    </script>
 </html>

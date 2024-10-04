@@ -74,6 +74,7 @@ class StripeController extends Controller
                     'invoice_url' => $invoiceUrl ?? null,
                 ));
                 
+                $subscription->stripe_subscription_id = $session['subscription'];
                 $subscription->status = 'active';
                 $subscription->save();
 

@@ -125,4 +125,37 @@ class UserSubscriptionController extends Controller
     {
         return view('livewire.pages.manage-user-subscription.cancel');
     }
+
+    public function cancel_sub() {
+        // Set Stripe API key
+    Stripe::setApiKey(config('services.stripe.secret'));
+
+    // Get the logged-in user
+    $user = Auth::user();
+
+    // Retrieve the user's current subscription (assumes you store the subscription ID)
+    $userSubscription = UserSubscription::where('user_id', $user->id)->first();
+
+    if ($userSubscription && $userSubscription->stripe_subscription_id) {
+        try {
+            // Retrieve the Stripe subscription
+            $subscription = \Stripe\Subscription::retrieve($userSubscription->stripe_subscription_id);
+
+            // Cancel the subscription immediately or at the end of the billing cycle
+            $subscription->cancel(); // or $subscription->cancel(['at_period_end' => true]);
+
+            // Update the status in your UserSubscription table
+            $userSubscription->status = 'cancelled';
+            $userSubscription->save();
+
+            return back()->with('success', 'Your subscription has been cancelled successfully.');
+
+        } catch (ApiErrorException $e) {
+            return back()->withErrors(['error' => 'Failed to cancel the subscription: ' . $e->getMessage()]);
+        }
+    } else {
+        return back()->withErrors(['error' => 'No active subscription found.']);
+    }
+    }
 }
+

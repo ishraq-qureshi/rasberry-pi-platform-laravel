@@ -100,7 +100,8 @@ return [
   "execute_curl_request" => "Execute cURL Request",
   "execute_curl_request_desc" => "Run this command on your rasberry pi shell to automate installation",
   "create_python_file" => "Create a Pyhton Script",
-  "create_python_file_desc_1" => "Ensure that your Python script",
+  "create_python_file_desc_1" => "Run the command to create connection.py file",
+  "create_python_file_desc_2" => "Copy the below code",
   "temperature_reached" => "Temperature has reached",
   "storage_reached" => "Storage usage has reached",
   "ram_reached" => "RAM usage has reached",
@@ -203,6 +204,16 @@ return [
   "french" => "French",
   "surname_placeholder" => "Enter your surname",
   "models" => "Manage Models",
-  "download_invoice" => "Download Invoice"
-
+  "download_invoice" => "Download Invoice",
+  "my_dashboard" => "My Dashboard",
+  "my_invoices" => "My Payment History",
+  "my_invoices_desc" => "Download and check invoices against the payments",
+  "invoice" => "Invoices",
+  "date" => "Date",
+  "manage_subscription" => "Manage My Subscriptions",
+  "cancel_subscription" => "Cancel My Subscription",
+  "manage_my_tickets" => "Manage My Tickets",
+  "add_support_ticket" => "Add New Ticket",
+  "title" => "Title",
+  "manage_support_tickets" => "Manage Support Tickets",
 ];
