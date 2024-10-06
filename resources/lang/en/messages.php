@@ -216,5 +216,13 @@ return [
   "add_support_ticket" => "Add New Ticket",
   "title" => "Title",
   "manage_support_tickets" => "Manage Support Tickets",
-  "comment" => "Comment"
+  "comment" => "Comment",
+  "setting" => "Setting",
+  "manage_settings" => "Manage Settings",
+  "cpu_notification" => "CPU Notification",
+  "ram_notification" => "Ram Nofification",
+  "storage_notification" => "Storage Notification",
+  "temperature_notification" => "Temperature Noftification",
+  "ideal" => "Ideal",
+  "turn_off_notification" => "Turn Off Notification"  
 ];

@@ -10,6 +10,7 @@ use App\Http\Controllers\RasberryPiModelController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserSupportTicketsController;
+use App\Http\Controllers\UserSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +123,14 @@ Route::middleware('auth')->group(function () {
                 ->name('user-tickets.save');
             Route::post('/reply/{id}', [UserSupportTicketsController::class, "reply"])
                 ->name('user-tickets.reply');
+            
+        });
+
+        Route::prefix('user-setting')->group(function () {
+            Route::get('/edit', [UserSettingController::class, "edit"])
+                ->name('user-setting.edit');
+            Route::post('/save', [UserSettingController::class, "save"])
+                ->name('user-setting.save');            
             
         });
 

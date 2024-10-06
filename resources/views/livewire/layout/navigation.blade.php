@@ -148,10 +148,11 @@ new class extends Component
                             {{ __('messages.profile') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="app()->getLocale() === 'en' ? route('lang.switch', ['locale' => 'fr']) : route('lang.switch', ['locale' => 'en'])" wire:navigate>
-                            {{ app()->getLocale() === 'en' ? __('messages.french') : __('messages.english') }}
+                        @role('admin')
+                        <x-dropdown-link :href="route('user-setting.edit')" wire:navigate>
+                            {{ __('messages.setting') }}
                         </x-dropdown-link>
-                        
+                        @endrole
 
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">

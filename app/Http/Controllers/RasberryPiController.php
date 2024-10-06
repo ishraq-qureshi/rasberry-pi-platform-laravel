@@ -14,6 +14,7 @@ use App\Models\RasberryPiToken;
 use Illuminate\Support\Str;
 use App\Mail\NotificationMail;
 use Illuminate\Support\Facades\Mail;
+use App\Models\UserSetting;
 
 
 class RasberryPiController extends Controller
@@ -166,8 +167,9 @@ class RasberryPiController extends Controller
             )
         );
         
+        $cpu_notification_setting = UserSetting::where(['user_id' => $user->id, 'key' => 'cpu_notification'])->first();
 
-        if($this->checkStatus(floatval($request->cpu_usage)) === "danger") {     
+        if($cpu_notification_setting && $cpu_notification_setting->value === $this->checkStatus(floatval($request->cpu_usage))) {
             $details['data'] = array(
                 "key" => "CPU Usage",
                 "value" => $request->cpu_usage
@@ -184,7 +186,9 @@ class RasberryPiController extends Controller
             )
         );
 
-        if($this->checkStatus(floatval($request->temperature)) === "danger") {     
+        $temperature_notification_setting = UserSetting::where(['user_id' => $user->id, 'key' => 'temperature_notification'])->first();
+
+        if($temperature_notification_setting && $temperature_notification_setting->value === $this->checkStatus(floatval($request->temperature))) {
             $details['data'] = array(
                 "key" => "Temperature",
                 "value" => $request->temperature
@@ -201,7 +205,9 @@ class RasberryPiController extends Controller
             )
         );
 
-        if($this->checkStatus(floatval($request->ram_usage)) === "danger") {     
+        $ram_notification_setting = UserSetting::where(['user_id' => $user->id, 'key' => 'ram_notification'])->first();
+
+        if($ram_notification_setting && $ram_notification_setting->value === $this->checkStatus(floatval($request->ram_usage))) {
             $details['data'] = array(
                 "key" => "Ram Usage",
                 "value" => $request->ram_usage
@@ -218,7 +224,9 @@ class RasberryPiController extends Controller
             )
         );
 
-        if($this->checkStatus(floatval($request->storage_usage)) === "danger") {     
+        $storage_notification_setting = UserSetting::where(['user_id' => $user->id, 'key' => 'storage_notification'])->first();
+
+        if($storage_notification_setting && $storage_notification_setting->value === $this->checkStatus(floatval($request->storage_usage))) {     
             $details['data'] = array(
                 "key" => "Storage",
                 "value" => $request->storage_usage

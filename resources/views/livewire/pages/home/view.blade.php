@@ -21,11 +21,28 @@
         <header class="px-4 py-4 bg-white fixed top-0 w-full z-10">
           <div class="max-w-[1280px] m-auto">
             <div class="flex justify-between items-center">
-              <div class="lg:w-auto w-full">
+              <div class="lg:w-auto w-36">
                 <a href="{{ route("home") }}" class="block lg:text-left text-center">
                   <x-application-logo class="block h-9 w-auto fill-current text-gray-800 lg:m-0 m-auto" />
                 </a>
               </div>
+              <nav class="block lg:hidden">
+                <ul class="flex gap-8 items-center">
+                  @if(auth()->check())
+                  <li class="flex gap-2">
+                    <a class="bg-secondary hover:bg-gray-700 text-white block px-6 py-2 rounded-full font-medium" href="{{ route("dashboard") }}">{{ __("messages.my_dashboard") }}</a>                    
+                  </li>
+                  @else
+                  <li class="flex gap-2">
+                    <a class="bg-secondary hover:bg-gray-700 text-white block px-4 py-2 text-sm rounded-full font-medium" href="{{ route("register") }}">{{ __("messages.register") }}</a>
+                    <a class="bg-primary hover:bg-primaryDark text-white block px-4 py-2 text-sm rounded-full font-medium" href="{{ route("login") }}">{{ __("messages.login") }}</a>
+                  </li>
+                  @endif
+                  <li>
+                    
+                  </li>
+                </ul>
+              </nav>
               <nav class="hidden lg:block">
                 <ul class="flex gap-8 items-center">
                   <li>
