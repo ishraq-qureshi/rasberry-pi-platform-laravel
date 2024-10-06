@@ -28,7 +28,12 @@ class User extends Authenticatable
         'telephone',
         'billing_address',
         'postal_address',
-        'company_name'
+        'company_name',
+        'vat',
+        'street',
+        'city',
+        'country',
+        'postal_code'
     ];
 
     /**

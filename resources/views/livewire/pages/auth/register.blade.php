@@ -21,6 +21,11 @@ new #[Layout('layouts.guest')] class extends Component
     public string $company_name = '';
     public string $surname = '';
     public string $telephone = '';
+    public string $vat = '';
+    public string $street = '';
+    public string $city = '';
+    public string $country = '';
+    public string $postal_code = '';
 
     public function mount(string $pricing_plan_id = ''): void
     {
@@ -38,9 +43,12 @@ new #[Layout('layouts.guest')] class extends Component
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
             'surname' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'string', 'max:255'],     
-            'billing_address' => ['string', 'max:255'],    
-            'postal_address' => ['string', 'max:255'],    
-            'company_name' => ['string', 'max:255'],           
+            'company_name' => ['string', 'max:255'],
+            'vat' => ['string', 'max:255'],
+            'street' => ['string', 'max:255'],
+            'city' => ['string', 'max:255'],
+            'country' => ['string', 'max:255'],
+            'postal_code' => ['string', 'max:255'],                       
         ]);
         
         $validated['password'] = Hash::make($validated['password']);
@@ -90,23 +98,44 @@ new #[Layout('layouts.guest')] class extends Component
                 </div>
             </div>
             
-            <div>
-                <x-input-label for="company_name" :value="__('messages.company_name')" />
-                <x-text-input wire:model="company_name" id="company_name" class="block mt-1 w-full" type="text" name="company_name" required autofocus autocomplete="company_name" />
-                <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
+            <div class="flex gap-4">
+                <div class="flex-1">
+                    <x-input-label for="company_name" :value="__('messages.company_name')" />
+                    <x-text-input wire:model="company_name" id="company_name" class="block mt-1 w-full" type="text" name="company_name" required autofocus autocomplete="company_name" />
+                    <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
+                </div>
+                <div>
+                    <x-input-label for="vat" :value="__('messages.vat')" />
+                    <x-text-input wire:model="vat" id="vat" class="block mt-1 w-full" type="text" name="vat" required autofocus autocomplete="vat" />
+                    <x-input-error :messages="$errors->get('vat')" class="mt-2" />
+                </div>
             </div>
     
             <div class="flex gap-4">
                 <div class="flex-1">
-                    <x-input-label for="billing_address" :value="__('messages.billing_address')" />
-                    <x-text-input wire:model="billing_address" id="billing_address" class="block mt-1 w-full" type="text" name="billing_address" required autofocus autocomplete="billing_address" />
-                    <x-input-error :messages="$errors->get('billing_address')" class="mt-2" />
+                    <x-input-label for="street" :value="__('messages.street')" />
+                    <x-text-input wire:model="street" id="street" class="block mt-1 w-full" type="text" name="street" required autofocus autocomplete="street" />
+                    <x-input-error :messages="$errors->get('street')" class="mt-2" />
                 </div>
         
                 <div class="flex-1">
-                    <x-input-label for="postal_address" :value="__('messages.postal_address')" />
-                    <x-text-input wire:model="postal_address" id="postal_address" class="block mt-1 w-full" type="text" name="postal_address" required autofocus autocomplete="postal_address" />
-                    <x-input-error :messages="$errors->get('postal_address')" class="mt-2" />
+                    <x-input-label for="city" :value="__('messages.city')" />
+                    <x-text-input wire:model="city" id="city" class="block mt-1 w-full" type="text" name="city" required autofocus autocomplete="city" />
+                    <x-input-error :messages="$errors->get('city')" class="mt-2" />
+                </div>
+            </div>
+
+            <div class="flex gap-4">
+                <div class="flex-1">
+                    <x-input-label for="country" :value="__('messages.country')" />
+                    <x-text-input wire:model="country" id="country" class="block mt-1 w-full" type="text" name="country" required autofocus autocomplete="country" />
+                    <x-input-error :messages="$errors->get('country')" class="mt-2" />
+                </div>
+        
+                <div class="flex-1">
+                    <x-input-label for="postal_code" :value="__('messages.postal_code')" />
+                    <x-text-input wire:model="postal_code" id="postal_code" class="block mt-1 w-full" type="text" name="postal_code" required autofocus autocomplete="postal_code" />
+                    <x-input-error :messages="$errors->get('postal_code')" class="mt-2" />
                 </div>
             </div>
     

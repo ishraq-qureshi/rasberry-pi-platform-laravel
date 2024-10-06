@@ -16,6 +16,11 @@ new class extends Component
     public string $billing_address = '';
     public string $postal_address = '';
     public string $company_name = '';
+    public string $vat = '';
+    public string $street = '';
+    public string $city = '';
+    public string $country = '';
+    public string $postal_code = '';
 
     /**
      * Mount the component.
@@ -26,9 +31,12 @@ new class extends Component
         $this->email = Auth::user()->email;
         $this->surname = Auth::user()->surname;
         $this->telephone = Auth::user()->telephone;
-        $this->billing_address = Auth::user()->billing_address;
-        $this->postal_address = Auth::user()->postal_address;
-        $this->company_name = Auth::user()->company_name;
+        $this->company_name = Auth::user()->company_name ? Auth::user()->company_name : "";
+        $this->vat = Auth::user()->vat ? Auth::user()->vat : "";
+        $this->street = Auth::user()->street ? Auth::user()->street : "";
+        $this->city = Auth::user()->city ? Auth::user()->city : "";
+        $this->country = Auth::user()->country ? Auth::user()->country : "";
+        $this->postal_code = Auth::user()->postal_code ? Auth::user()->postal_code : "";
         
     }
 
@@ -47,6 +55,11 @@ new class extends Component
             'billing_address' => ['string', 'max:255'],    
             'postal_address' => ['string', 'max:255'],    
             'company_name' => ['string', 'max:255'],
+            'vat' => ['string', 'max:255'],
+            'street' => ['string', 'max:255'],
+            'city' => ['string', 'max:255'],
+            'country' => ['string', 'max:255'],
+            'postal_code' => ['string', 'max:255'],   
         ]);
 
         $user->fill($validated);
@@ -110,15 +123,39 @@ new class extends Component
         </div>
 
         <div>
-            <x-input-label for="billing_address" :value="__('messages.billing_address')" />
-            <x-text-input wire:model="billing_address" id="billing_address" name="billing_address" type="text" class="mt-1 block w-full" required autofocus autocomplete="billing_address" />
-            <x-input-error class="mt-2" :messages="$errors->get('billing_address')" />
+            <x-input-label for="company_name" :value="__('messages.company_name')" />
+            <x-text-input wire:model="company_name" id="company_name" name="company_name" type="text" class="mt-1 block w-full" required autofocus autocomplete="company_name" />
+            <x-input-error class="mt-2" :messages="$errors->get('company_name')" />
         </div>
 
         <div>
-            <x-input-label for="postal_address" :value="__('messages.postal_address')" />
-            <x-text-input wire:model="postal_address" id="postal_address" name="postal_address" type="text" class="mt-1 block w-full" required autofocus autocomplete="postal_address" />
-            <x-input-error class="mt-2" :messages="$errors->get('postal_address')" />
+            <x-input-label for="vat" :value="__('messages.vat')" />
+            <x-text-input wire:model="vat" id="vat" name="vat" type="text" class="mt-1 block w-full" required autofocus autocomplete="vat" />
+            <x-input-error class="mt-2" :messages="$errors->get('vat')" />
+        </div>
+
+        <div>
+            <x-input-label for="street" :value="__('messages.street')" />
+            <x-text-input wire:model="street" id="street" name="street" type="text" class="mt-1 block w-full" required autofocus autocomplete="street" />
+            <x-input-error class="mt-2" :messages="$errors->get('street')" />
+        </div>
+
+        <div>
+            <x-input-label for="city" :value="__('messages.city')" />
+            <x-text-input wire:model="city" id="city" name="city" type="text" class="mt-1 block w-full" required autofocus autocomplete="city" />
+            <x-input-error class="mt-2" :messages="$errors->get('city')" />
+        </div>
+
+        <div>
+            <x-input-label for="country" :value="__('messages.country')" />
+            <x-text-input wire:model="country" id="country" name="country" type="text" class="mt-1 block w-full" required autofocus autocomplete="country" />
+            <x-input-error class="mt-2" :messages="$errors->get('country')" />
+        </div>
+
+        <div>
+            <x-input-label for="postal_code" :value="__('messages.postal_code')" />
+            <x-text-input wire:model="postal_code" id="postal_code" name="postal_code" type="text" class="mt-1 block w-full" required autofocus autocomplete="postal_code" />
+            <x-input-error class="mt-2" :messages="$errors->get('postal_code')" />
         </div>
 
         <div>
