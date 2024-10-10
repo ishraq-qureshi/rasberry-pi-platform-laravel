@@ -13,7 +13,12 @@ class UserSettingController extends Controller
 
         $settings = UserSetting::where('user_id', $user->id)->get();
 
-        $data = [];
+        $data = [
+            "cpu_notification" => "",
+            "ram_notification" => "",
+            "temperature_notification" => "",
+            "storage_notification" => ""
+        ];
 
         foreach($settings as $setting) {
             $data[$setting->key] = $setting->value;
